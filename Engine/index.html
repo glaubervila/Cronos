@@ -1,0 +1,51 @@
+<html>
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!--         <link rel="shortcut icon" href="http://www.extjs.com/favicon.ico" /> -->
+
+        <!--css-->
+        <link rel="stylesheet" type="text/css" href="main.css"/>
+
+        <title>Cronos</title>
+
+    </head>
+
+    <body>
+
+        <!--ExtJs-->
+        <script type="text/javascript" src="../ext-3.2.0/adapter/ext/ext-base.js"></script>
+        <script type="text/javascript" src="../ext-3.2.0/ext-all.js"></script>
+        <script type="text/javascript" src="../ext-3.2.0/locale/ext-lang-pt_BR.js"></script>
+
+        <!--Plugins-->
+
+        <script type="text/javascript">
+
+            Ext.Ajax.request({
+                url    : 'main.php'
+                , params : {
+                    classe : 'Common'
+                    , action: 'verifica_servidor_mysql'
+                }
+                , scope  : this
+                , success: function(response){
+                    response = Ext.decode(response.responseText);
+                    if( response.success ){
+                        window.location.href = 'login.html';
+                    }
+                    else {
+                        document.getElementById('servidor_offline').innerHTML = response.msg;
+                        //window.location.href = 'index.html';
+                    }
+                }
+            });
+
+        </script>
+
+        <div id="servidor_offline"></div>
+
+    </body>
+
+</html>
+

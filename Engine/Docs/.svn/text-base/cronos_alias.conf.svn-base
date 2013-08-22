@@ -1,0 +1,38 @@
+# CONFIGURAÇÃO CRONOS SERVIDOR
+    <Directory "/var/www/cronos/">
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Order allow,deny
+        Allow from all
+    </Directory>
+    <Directory "/var/www/cronos/ext-3.2.0">
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Order allow,deny
+        Allow from all
+    </Directory>
+    <Directory "/var/www/cronos/Engine">
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Order allow,deny
+        Allow from all
+    </Directory>
+    <Directory "/var/www/cronos/Engine/Main/Modulos/WebService">
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Order allow,deny
+        Allow from all
+    </Directory>
+    <Directory "/var/www/cronos/Engine/Main/Data/Imagens_Produtos">
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Order allow,deny
+        Allow from all
+    </Directory>
+
+
+
+    Alias /ext-3.2.0 "/var/www/cronos/ext-3.2.0/"
+    Alias /cronos "/var/www/cronos/Engine/"
+    Alias /webservice "/var/www/cronos/Engine/Main/Modulos/WebService"
+    Alias /webservice "/var/www/cronos/Engine/Main/Data/Imagens_Produtos"

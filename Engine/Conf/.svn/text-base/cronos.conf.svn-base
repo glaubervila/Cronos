@@ -1,0 +1,50 @@
+# engine.conf
+#
+# @author Glauber Costa Vila-Verde
+# @since  19/Jan/2010
+# @descr  Arquivo de Configuracao
+# *** OBS: Nao use espacos entre o parametro e a opcao
+
+# ==================================
+# General configuration
+
+#Main dir
+main_dir=/var/www/cronos/Engine/
+
+# diretorio Work
+work_dir=Main/Work/
+
+# diretorio RCV
+rcv_dir=Main/Data/RCV/
+
+# diretorio Compartilhado
+smb_dir=/home/atacado/Compartilhado/
+
+# diretorio FTP
+ftp_dir=/home/ftp_atacado/
+
+# diretorio Bin onde se encontra os scripts
+bin_dir=Main/Bin/
+
+# diretorio onde fica o arquivo de pid
+pidfile_dir=Main/Work/
+
+# diretorio onde fica o arquivo de lock
+lockfile_dir=Main/Work/
+
+# diretorio onde fica o arquivo de Log
+log_file_dir=Log/
+
+# Liga(1)/Desliga(0) o Log
+log_enable=1
+
+# Tempo de Espera no Loop do RCV
+rcv_sleep=1
+# Tempo de Espera no Loop do SMB
+smb_sleep=350
+
+# ===================================
+# Specific parameters
+
+
+

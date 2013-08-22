@@ -1,0 +1,82 @@
+2013-02-23 10:26:43 0.194 ::  AUTOLOAD Class[ Log ] File [ Main/PHP/Log.class.php ]
+2013-02-23 10:26:43 0.204 ::  AUTOLOAD Class[ Permissoes ] File [ Main/Modulos/Acesso/Permissoes.class.php ]
+2013-02-23 10:26:43 0.204 ::  Class[Permissoes] Method[__construct]
+
+Array __REQUEST
+[classe] = "Permissoes"
+[action] = "retorna_todas_permissoes"
+2013-02-23 10:26:43 0.205 ::  Class[Permissoes] Method[retorna_permissoes]
+2013-02-23 10:26:43 0.206 ::  AUTOLOAD Class[ Repository ] File [ Main/PHP/Repository.class.php ]
+2013-02-23 10:26:43 0.210 ::  AUTOLOAD Class[ Transaction ] File [ Main/PHP/Transaction.class.php ]
+2013-02-23 10:26:43 0.335 ::  AUTOLOAD Class[ Connection ] File [ Main/PHP/Connection.class.php ]
+2013-02-23 10:26:43 0.514 ::  Transaction [ Begin: mysql ]
+2013-02-23 10:26:43 0.573 ::  Status[ OK ] Results[ 19 ] Query[ SELECT P.id, P.Usuario, P.Tela, T.identificacao, P.ins, P.upd, P.del, P.imp, P.exc FROM Permissoes P, Telas T WHERE P.Tela = T.id AND P.Usuario = '2' ]
+2013-02-23 10:26:43 0.591 ::  Transaction [ Commit ]
+2013-02-23 10:26:43 0.994 ::  AUTOLOAD Class[ Log ] File [ Main/PHP/Log.class.php ]
+2013-02-23 10:26:43 0.994 ::  AUTOLOAD Class[ Configuracoes ] File [ Main/PHP/Configuracoes.class.php ]
+2013-02-23 10:26:43 0.994 ::  Class[ Configuracoes ] Method[ __construct ]
+
+Array __REQUEST
+[classe] = "Configuracoes"
+[action] = "recupera_configuracoes"
+2013-02-23 10:26:43 0.996 ::  AUTOLOAD Class[ Repository ] File [ Main/PHP/Repository.class.php ]
+2013-02-23 10:26:43 0.996 ::  AUTOLOAD Class[ Transaction ] File [ Main/PHP/Transaction.class.php ]
+2013-02-23 10:26:43 0.996 ::  AUTOLOAD Class[ Connection ] File [ Main/PHP/Connection.class.php ]
+2013-02-23 10:26:43 0.997 ::  Transaction [ Begin: mysql ]
+2013-02-23 10:26:44 0.019 ::  Status[ OK ] Results[ 12 ] Query[ SELECT * FROM configuracao ]
+2013-02-23 10:26:44 0.019 ::  Transaction [ Commit ]
+2013-02-23 10:26:44 0.127 ::  AUTOLOAD Class[ Log ] File [ Main/PHP/Log.class.php ]
+2013-02-23 10:26:44 0.127 ::  AUTOLOAD Class[ Usuarios ] File [ Main/Modulos/Acesso/Usuarios.class.php ]
+2013-02-23 10:26:44 0.127 ::  Class[Usuarios] Method[__construct]
+
+Array __REQUEST
+[classe] = "Usuarios"
+[action] = "verifica_sessao"
+2013-02-23 10:26:44 0.127 ::  Class[Usuarios] Method[verifica_sessao]
+2013-02-23 10:26:44 0.127 ::  Result[1]
+2013-02-23 10:26:44 0.256 ::  AUTOLOAD Class[ Log ] File [ Main/PHP/Log.class.php ]
+2013-02-23 10:26:44 0.256 ::  AUTOLOAD Class[ Permissoes ] File [ Main/Modulos/Acesso/Permissoes.class.php ]
+2013-02-23 10:26:44 0.256 ::  Class[Permissoes] Method[__construct]
+
+Array __REQUEST
+[classe] = "Permissoes"
+[action] = "menu_dinamico"
+2013-02-23 10:26:44 0.257 ::  Class[Permissoes] Method[menu_dinamico]
+2013-02-23 10:26:44 0.257 ::  Class[Permissoes] Method[get_categorias]
+2013-02-23 10:26:44 0.260 ::  AUTOLOAD Class[ Repository ] File [ Main/PHP/Repository.class.php ]
+2013-02-23 10:26:44 0.262 ::  AUTOLOAD Class[ Transaction ] File [ Main/PHP/Transaction.class.php ]
+2013-02-23 10:26:44 0.262 ::  AUTOLOAD Class[ Connection ] File [ Main/PHP/Connection.class.php ]
+2013-02-23 10:26:44 0.263 ::  Transaction [ Begin: mysql ]
+2013-02-23 10:26:44 0.263 ::  Status[ OK ] Results[ 7 ] Query[ SELECT DISTINCT(T.root) from Telas T, Permissoes P WHERE T.id = P.Tela AND P.Usuario = 2 AND P.sel = 1 AND T.root <> 0 ; ]
+2013-02-23 10:26:44 0.264 ::  Transaction [ Commit ]
+2013-02-23 10:26:44 0.264 ::  Transaction [ Begin: mysql ]
+2013-02-23 10:26:44 0.265 ::  Status[ OK ] Results[ 7 ] Query[ SELECT T.id, T.root, T.titulo, T.icone, T.eXtype  FROM Telas T, Permissoes P WHERE T.id = P.Tela AND T.root = 0 AND T.id IN (10,1,5,13,15,20,28) ORDER BY T.ordem; ]
+2013-02-23 10:26:44 0.265 ::  Transaction [ Commit ]
+2013-02-23 10:26:44 0.265 ::  Class[Permissoes] Method[get_itens(10)]
+2013-02-23 10:26:44 0.267 ::  Transaction [ Begin: mysql ]
+2013-02-23 10:26:44 0.268 ::  Status[ OK ] Results[ 2 ] Query[  SELECT T.id, T.root, T.titulo, T.icone, T.eXtype, T.diretorio, T.arquivo, T.ordem FROM Telas T, Permissoes P WHERE T.id = P.Tela AND T.root = 10 AND P.Usuario = 2 AND P.sel = 1 ORDER BY T.ordem, T.titulo ]
+2013-02-23 10:26:44 0.268 ::  Transaction [ Commit ]
+2013-02-23 10:26:44 0.269 ::  Class[Permissoes] Method[get_itens(13)]
+2013-02-23 10:26:44 0.269 ::  Transaction [ Begin: mysql ]
+2013-02-23 10:26:44 0.270 ::  Status[ OK ] Results[ 3 ] Query[  SELECT T.id, T.root, T.titulo, T.icone, T.eXtype, T.diretorio, T.arquivo, T.ordem FROM Telas T, Permissoes P WHERE T.id = P.Tela AND T.root = 13 AND P.Usuario = 2 AND P.sel = 1 ORDER BY T.ordem, T.titulo ]
+2013-02-23 10:26:44 0.270 ::  Transaction [ Commit ]
+2013-02-23 10:26:44 0.270 ::  Class[Permissoes] Method[get_itens(15)]
+2013-02-23 10:26:44 0.271 ::  Transaction [ Begin: mysql ]
+2013-02-23 10:26:44 0.272 ::  Status[ OK ] Results[ 5 ] Query[  SELECT T.id, T.root, T.titulo, T.icone, T.eXtype, T.diretorio, T.arquivo, T.ordem FROM Telas T, Permissoes P WHERE T.id = P.Tela AND T.root = 15 AND P.Usuario = 2 AND P.sel = 1 ORDER BY T.ordem, T.titulo ]
+2013-02-23 10:26:44 0.272 ::  Transaction [ Commit ]
+2013-02-23 10:26:44 0.272 ::  Class[Permissoes] Method[get_itens(20)]
+2013-02-23 10:26:44 0.272 ::  Transaction [ Begin: mysql ]
+2013-02-23 10:26:44 0.273 ::  Status[ OK ] Results[ 4 ] Query[  SELECT T.id, T.root, T.titulo, T.icone, T.eXtype, T.diretorio, T.arquivo, T.ordem FROM Telas T, Permissoes P WHERE T.id = P.Tela AND T.root = 20 AND P.Usuario = 2 AND P.sel = 1 ORDER BY T.ordem, T.titulo ]
+2013-02-23 10:26:44 0.273 ::  Transaction [ Commit ]
+2013-02-23 10:26:44 0.274 ::  Class[Permissoes] Method[get_itens(28)]
+2013-02-23 10:26:44 0.274 ::  Transaction [ Begin: mysql ]
+2013-02-23 10:26:44 0.275 ::  Status[ OK ] Results[ 1 ] Query[  SELECT T.id, T.root, T.titulo, T.icone, T.eXtype, T.diretorio, T.arquivo, T.ordem FROM Telas T, Permissoes P WHERE T.id = P.Tela AND T.root = 28 AND P.Usuario = 2 AND P.sel = 1 ORDER BY T.ordem, T.titulo ]
+2013-02-23 10:26:44 0.275 ::  Transaction [ Commit ]
+2013-02-23 10:26:44 0.276 ::  Class[Permissoes] Method[get_itens(1)]
+2013-02-23 10:26:44 0.276 ::  Transaction [ Begin: mysql ]
+2013-02-23 10:26:44 0.277 ::  Status[ OK ] Results[ 3 ] Query[  SELECT T.id, T.root, T.titulo, T.icone, T.eXtype, T.diretorio, T.arquivo, T.ordem FROM Telas T, Permissoes P WHERE T.id = P.Tela AND T.root = 1 AND P.Usuario = 2 AND P.sel = 1 ORDER BY T.ordem, T.titulo ]
+2013-02-23 10:26:44 0.277 ::  Transaction [ Commit ]
+2013-02-23 10:26:44 0.277 ::  Class[Permissoes] Method[get_itens(5)]
+2013-02-23 10:26:44 0.278 ::  Transaction [ Begin: mysql ]
+2013-02-23 10:26:44 0.278 ::  Status[ OK ] Results[ 1 ] Query[  SELECT T.id, T.root, T.titulo, T.icone, T.eXtype, T.diretorio, T.arquivo, T.ordem FROM Telas T, Permissoes P WHERE T.id = P.Tela AND T.root = 5 AND P.Usuario = 2 AND P.sel = 1 ORDER BY T.ordem, T.titulo ]
+2013-02-23 10:26:44 0.279 ::  Transaction [ Commit ]

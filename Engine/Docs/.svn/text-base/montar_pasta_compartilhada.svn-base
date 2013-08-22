@@ -1,0 +1,4 @@
+// Montar Pasta Compartilhada
+mount -t cifs //192.168.0.100/dados/stoq/emporio /home/atacado/Compartilhado -o username=root,password=emporium
+
+// Criar Pasta Compartilhada

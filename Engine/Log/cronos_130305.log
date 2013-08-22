@@ -1,0 +1,36 @@
+2013-03-05 15:39:16 0.862 ::  AUTOLOAD Class[ Log ] File [ Main/PHP/Log.class.php ]
+2013-03-05 15:39:16 0.864 ::  AUTOLOAD Class[ Usuarios ] File [ Main/Modulos/Acesso/Usuarios.class.php ]
+2013-03-05 15:39:16 0.864 ::  Class[Usuarios] Method[__construct]
+
+Array __REQUEST
+[classe] = "Usuarios"
+[action] = "verifica_sessao"
+2013-03-05 15:39:16 0.864 ::  Class[Usuarios] Method[verifica_sessao]
+2013-03-05 15:39:16 0.864 ::  Result[]
+2013-03-05 15:39:16 0.888 ::  AUTOLOAD Class[ Log ] File [ Main/PHP/Log.class.php ]
+2013-03-05 15:39:16 0.888 ::  AUTOLOAD Class[ Configuracoes ] File [ Main/PHP/Configuracoes.class.php ]
+2013-03-05 15:39:16 0.888 ::  Class[ Configuracoes ] Method[ __construct ]
+
+Array __REQUEST
+[classe] = "Configuracoes"
+[action] = "recupera_configuracoes"
+2013-03-05 15:39:16 0.898 ::  AUTOLOAD Class[ Repository ] File [ Main/PHP/Repository.class.php ]
+2013-03-05 15:39:16 0.898 ::  AUTOLOAD Class[ Transaction ] File [ Main/PHP/Transaction.class.php ]
+2013-03-05 15:39:16 0.899 ::  AUTOLOAD Class[ Connection ] File [ Main/PHP/Connection.class.php ]
+2013-03-05 15:39:16 0.003 ::  Transaction [ Begin: mysql ]
+2013-03-05 15:39:16 0.009 ::  Status[ OK ] Results[ 12 ] Query[ SELECT * FROM configuracao ]
+2013-03-05 15:39:16 0.009 ::  Transaction [ Commit ]
+2013-03-05 15:39:17 0.021 ::  AUTOLOAD Class[ Log ] File [ Main/PHP/Log.class.php ]
+2013-03-05 15:39:17 0.022 ::  AUTOLOAD Class[ Permissoes ] File [ Main/Modulos/Acesso/Permissoes.class.php ]
+2013-03-05 15:39:17 0.022 ::  Class[Permissoes] Method[__construct]
+
+Array __REQUEST
+[classe] = "Permissoes"
+[action] = "retorna_todas_permissoes"
+2013-03-05 15:39:17 0.022 ::  Class[Permissoes] Method[retorna_permissoes]
+2013-03-05 15:39:17 0.024 ::  AUTOLOAD Class[ Repository ] File [ Main/PHP/Repository.class.php ]
+2013-03-05 15:39:17 0.025 ::  AUTOLOAD Class[ Transaction ] File [ Main/PHP/Transaction.class.php ]
+2013-03-05 15:39:17 0.025 ::  AUTOLOAD Class[ Connection ] File [ Main/PHP/Connection.class.php ]
+2013-03-05 15:39:17 0.027 ::  Transaction [ Begin: mysql ]
+2013-03-05 15:39:17 0.071 ::  Status[ OK ] Results[  ] Query[ SELECT P.id, P.Usuario, P.Tela, T.identificacao, P.ins, P.upd, P.del, P.imp, P.exc FROM Permissoes P, Telas T WHERE P.Tela = T.id AND P.Usuario = '' ]
+2013-03-05 15:39:17 0.082 ::  Transaction [ Commit ]

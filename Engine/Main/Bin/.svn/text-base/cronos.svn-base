@@ -1,0 +1,260 @@
+#!/bin/bash
+
+
+
+# ----------- Variaveis e arquivo de configuracao -----------
+programa="Cronos"
+conf_file="/var/www/cronos/Engine/Conf/cronos.conf"
+
+# conf_parser()
+#    usage: conf_parser <file>
+#    descr: Parses a config file, creating the
+#           variables an its values
+function conf_parser() {
+   [ -e ${1} ] || die "Arquivo nao encontrado: $1";
+   [ -r ${1} ] || die "Nao foi possivel ler o arquivo $1";
+   for line in `cat ${1} | cut -d= -f1  | grep -v '#'`; do
+      export ${line}=`cat ${1} | grep -v '#' | grep "${line}" | cut -d= -f2`;
+   done
+   return 0;
+}
+
+conf_parser $conf_file
+
+main_dir=${main_dir}
+work_dir=${work_dir}
+bin_dir=${main_dir}${bin_dir}
+pidfile="${main_dir}${pidfile_dir}${programa}.pid"
+lockfile="${main_dir}${lockfile_dir}${programa}.lock"
+logfile="${main_dir}${log_file_dir}${programa}.log"
+
+date=$(date +"%Y-%m-%d")
+
+
+trap 'rm -f ${lockfile} ; exit' 0 1 2 3 15
+
+#echo "Engine Pid[$$]";
+
+# Criar o pidfile
+echo $$ > $pidfile
+
+
+# ----------- Funcoes -----------
+
+function LogMsg(){
+
+    msg=$1
+    echo $(date +"%Y-%m-%d %H:%M:%S") ${msg} > ${logfile}
+
+}
+
+
+# IsRunning()
+#    usage: IsRunning() <Nome_Processo>
+#    descr: Testa se um processo ta em execucao
+function IsRunning() {
+  processo=$1
+  IS_RUNNING=0
+  lines=`ps -C ${processo} | wc | tr -s " " | cut -d" " -f2`
+  if [ ${lines} -gt 1 ]; then
+    IS_RUNNING=1
+  fi
+}
+
+# start()
+#    usage: start()
+#    descr: Inicia o processo principal
+#           usa a funcao process_start()
+#           para iniciar os processos em background
+function start() {
+
+    echo "Iniciando ${programa}"
+
+    # verificar se o programa esta ativo
+    if [ -r ${lockfile} ]; then
+        echo -e "    ${programa} Ja esta em Execucao [ \033[01;31m Nada Mudou \033[00;00m] "
+        exit
+    else
+        touch $lockfile
+
+        # executar os scripts em loop
+        process_start CheckRCV
+        process_start CheckSMB
+    fi
+}
+
+# process_start()
+#    usage: process_start() <Nome_Processo>
+#    descr: Inicia o processo em background
+#           usa a funcao IsRunning() para testar
+#           se o processo ta ativo
+function process_start() {
+    # Recebe o nome do processo
+    processo=$1
+    # se o processo ta em execucao
+    IsRunning ${processo}
+
+    if [ ${IS_RUNNING} -eq 1 ]; then
+        echo -e "    ${processo} Ja esta em Execucao [ \033[01;31m Nada Mudou \033[00;00m] "
+        return
+    else
+        ${bin_dir}${processo} &
+        IsRunning ${processo}
+        if [ ${IS_RUNNING} -eq 1 ]; then
+            Pid=`cat ${main_dir}${work_dir}${processo}.pid`
+            echo -e "    ${processo} - Pid:[ ${Pid} ] Status:[ \033[01;32m ATIVO \033[00;00m ]"
+        else
+            echo -e "    ${processo} - Pid:[ ${Pid} ] Status:[ \033[01;31m FALHOU \033[00;00m ]"
+        fi
+    fi
+}
+
+
+# stop()
+#    usage: stop()
+#    descr: Encerra o Processo principal
+#           Utiliza a funcao process_stop()
+#           para finalizar os processos em background
+function stop() {
+    echo "Finalizando ${programa}"
+
+    process_stop CheckRCV
+    process_stop CheckSMB
+
+    rm -f $lockfile
+    rm -f $pidfile
+}
+
+# process_stop()
+#    usage: process_stop() <Nome_Processo>
+#    descr: Encerra um Processo em background
+#           usa a funcao IsRunning() para testar
+#           se o processo ta ativo
+function process_stop(){
+    # Recebe o nome do processo
+    processo=$1
+    # se o processo ta em execucao
+    IsRunning ${processo}
+
+    if [ ${IS_RUNNING} -eq 0 ]; then
+        echo -e "    ${processo} nao esta ativo [ \033[01;31m Nada Mudou \033[00;00m]"
+        return
+    else
+        #echo "parando ${processo}"
+        # Se existir arquivo de pid
+        if [ -f ${main_dir}${work_dir}${processo}.pid ]; then
+            Pid=`cat ${main_dir}${work_dir}${processo}.pid`
+            /bin/kill "$Pid" >/dev/null
+            # Conferindo se parou o processo
+            if [ ${IS_RUNNING} -eq 0 ]; then
+                echo -e "    ${processo} - Pid:[ ${Pid} ] Status:[ \033[01;05;31m FALHOU \033[00;00m ]"
+            else
+                echo -e "    ${processo} - Pid:[ ${Pid} ] Status:[ \033[01;31m ENCERRADO \033[00;00m ]"
+                # Removendo arquivos de LOCK
+                rm -f ${main_dir}${work_dir}${processo}.lock
+                # Removendo arquivo de PID
+                rm -f ${main_dir}${work_dir}${processo}.pid
+            fi
+        # colocar uma contigencia para kill pelo nome
+        #else
+        fi
+    fi
+}
+
+# status()
+#    usage: status()
+#    descr: Retorna os status dos processos
+#           em background
+function status(){
+    echo -e "${programa} Status"
+
+    Process_Status CheckRCV
+    Process_Status CheckSMB
+}
+
+# Process_Status()
+#    usage: Process_Status() <Nome_Processo>
+#    descr: Retorna os status de um processos
+function Process_Status() {
+  # Recebe o nome do processo
+  processo=$1
+  # se o processo ta em execucao
+  IsRunning ${processo}
+  if [ ${IS_RUNNING} -eq 0 ]; then
+    echo -e "   ${processo} - Status:[ \033[01;31m Inativo \033[00;00m ]"
+    return
+  else
+    # status no process list
+    process_ps ${processo}
+
+    if [ -f ${main_dir}${work_dir}${processo}.pid ]; then
+        Pid=`cat ${main_dir}${work_dir}${processo}.pid`
+        echo -e "   ${processo} - Status:[ \033[01;32m ATIVO \033[00;00m ] Pid:[ $Pid ] Status_Ps:[ $STATUS_PS ]"
+    else
+        echo -e "   ${processo} - Status:[ \033[01;32m ATIVO \033[00;00m ] Pid:[ ---- ] Status_Ps:[ $STATUS_PS ]"
+    fi
+  fi
+}
+
+# process_ps()
+#    usage: process_ps() <Nome_Processo>
+#    descr: Retorna os status de um processos
+#           de acordo com o comando ps
+function process_ps(){
+  # Recebe o nome do processo
+  processo=$1
+  STATUS_PS="----"
+  status=`ps axc | grep ${processo} | awk -F" " '{print $3 ; }'`
+  case ${status} in
+    'R')
+        STATUS_PS="\033[01;32m Rodando \033[00;00m"
+    ;;
+    'S')
+        STATUS_PS="\033[01;33m Esperando \033[00;00m"
+    ;;
+
+    'D')
+        STATUS_PS="\033[01;31m Morto \033[00;00m"
+    ;;
+    'T')
+        STATUS_PS="\033[01;33m Parado \033[00;00m"
+    ;;
+    'Z')
+        STATUS_PS="\033[01;31m Erro \033[00;00m"
+    ;;
+    esac
+}
+
+# restart()
+#    usage: restart()
+#    descr: Reinicia todos os processos
+#           Utiliza as funcoes start e stop
+function restart() {
+    echo -e "Reiniciando ${processo}"
+    stop
+    start
+}
+
+
+# ----------- Progama Principal -----------
+
+case "$1" in
+
+'start')
+    start
+  ;;
+'stop')
+    stop
+  ;;
+
+'restart')
+    restart
+  ;;
+'status')
+    status
+  ;;
+*)
+  echo "usage start|stop|restart"
+esac
+
+exit

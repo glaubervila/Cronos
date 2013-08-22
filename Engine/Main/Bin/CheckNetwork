@@ -1,0 +1,20 @@
+#!/bin/bash
+# Verifica a Rede
+
+#echo "CheckNetwork Pid[$$]";
+
+programa="CheckNetwork"
+diretorio="/home/gverde/Teste_Script/"
+pidfile="${diretorio}$programa.pid"
+lockfile="${diretorio}$programa.lock"
+
+# Criar o pidfile
+echo $$ > $pidfile
+touch $lockfile
+
+i=0
+while [ -r $lockfile ]; do
+    echo "Pid [$$] loop [$i]" > "${diretorio}teste.txt"
+    ((i++))
+    sleep 5
+done

@@ -1,0 +1,79 @@
+<html>
+    <head>
+        <title></title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link id="favicon" rel="shortcut icon" type="image/ico" href="" />
+
+        <!--css-->
+        <link rel="stylesheet" type="text/css" href="main.css"/>
+        <link rel="stylesheet" type="text/css" href="../ext-3.2.0/resources/css/ext-all.css"/>
+        <link rel="stylesheet" type="text/css" href="../ext-3.2.0/shared/icons/silk.css"/>
+        <link rel="stylesheet" type="text/css" href="../ext-3.2.0/ux/statusbar/css/statusbar.css"/>
+        <link rel="stylesheet" type="text/css" href="../ext-3.2.0/ux/progresscolumn/css/ProgressColumn.css"/>
+        <link rel="stylesheet" type="text/css" href="../ext-3.2.0/ux/fileuploadfield/css/fileuploadfield.css"/>
+        <link rel="stylesheet" type="text/css" href="../ext-3.2.0/ux/rowactions/Ext.ux.grid.RowActions.css"/>
+
+    </head>
+
+    <body scroll="no" id="docs">
+
+        <div id="loading-mask" style=""></div>
+        <div id="loading">
+        <div class="loading-indicator">
+            <img  id="loading-gif" src="Resources/blue-loading.gif" width="32" height="32" style="margin-right:8px;float:left;vertical-align:top;"/>
+			<span id="loading-titulo">Cronos</span><br />
+            <span id="loading-msg">Carregando...</span>
+        </div>
+
+        <!-- Header -->
+        <div id="header">
+			<div id="Logotipo_banner" class="logotipo_banner"></div>
+			<div id="Titulo_Banner" class="api-title"></div>
+			<div class= "logout"><a href="Main/PHP/logout.php"><img src="Resources/shutdown.png" style="width:16px;height:16px;"/></a></div>
+
+            <div id = "usuario" class= "info_usuario"></div>
+
+        </div>
+
+        <div id="viewport">
+            <!--ExtJs-->
+<!--            <script type="text/javascript">document.getElementById('loading-msg').innerHTML = 'Carregando API...';</script>-->
+            <script type="text/javascript" src="../ext-3.2.0/adapter/ext/ext-base.js"></script>
+            <script type="text/javascript" src="../ext-3.2.0/ext-all.js"></script>
+
+<!--            <script type="text/javascript">document.getElementById('loading-msg').innerHTML = 'Carregando Linguagens...';</script>-->
+            <script type="text/javascript" src="../ext-3.2.0/locale/ext-lang-pt_BR.js"></script>
+
+<!--            <script type="text/javascript">document.getElementById('loading-msg').innerHTML = 'Carregando Componentes Ux...';</script>-->
+            <!--Ux-->
+            <script type="text/javascript" src="../ext-3.2.0/ux/TabCloseMenu.js"> </script>
+            <script type="text/javascript" src="../ext-3.2.0/ux/statusbar/StatusBar.js"> </script>
+
+            <script type="text/javascript" src="../ext-3.2.0/ux/ProgressBarPager.js"></script>
+            <script type="text/javascript" src="../ext-3.2.0/ux/gridsearch/Ext.ux.grid.Search.js"></script>
+            <script type="text/javascript" src="../ext-3.2.0/ux/CheckColumn.js"> </script>
+            <script type="text/javascript" src="../ext-3.2.0/ux/progresscolumn/ProgressColumn.js"> </script>
+            <script type="text/javascript" src="../ext-3.2.0/ux/fileuploadfield/FileUploadField.js"> </script>
+            <script type="text/javascript" src="../ext-3.2.0/ux/textmask/Ext.ux.TextMask.js"> </script>
+            <script type="text/javascript" src="../ext-3.2.0/ux/rowactions/Ext.ux.grid.RowActions.js"> </script>
+            <script type="text/javascript" src="../ext-3.2.0/ux/Ext.ux.Toast.js"> </script>
+
+
+<!--            <script type="text/javascript">document.getElementById('loading-msg').innerHTML = 'Carregando Variaveis Global...';</script>-->
+            <script type="text/javascript" src="Main/JScript/Common.js"> </script>
+            <script type="text/javascript" src="Main/JScript/FileUploads.js"> </script>
+
+<!--            <script type="text/javascript">document.getElementById('loading-msg').innerHTML = 'Carregando Sistema...';</script>-->
+
+            <!--JScript-->
+            <script type="text/javascript" src="Main/JScript/Loader.js"> </script>
+            <script type="text/javascript" src="Main/JScript/Overrides.js"> </script>
+
+<!--            <script type="text/javascript">document.getElementById('loading-msg').innerHTML = 'Inicializando...';</script>-->
+            <script type="text/javascript" src="Main/JScript/main.js"></script>
+
+        </div>
+
+    </body>
+</html>

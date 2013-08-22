@@ -1,0 +1,110 @@
+2013-06-13 22:27:04 0.354 ::  AUTOLOAD Class[ Log ] File [ Main/PHP/Log.class.php ]
+2013-06-13 22:27:04 0.382 ::  AUTOLOAD Class[ Common ] File [ Main/PHP/Common.class.php ]
+2013-06-13 22:27:04 0.382 ::  Class[Common] Method[__construct]
+
+Array __REQUEST
+[classe] = "Common"
+[action] = "verifica_servidor_mysql"
+2013-06-13 22:27:04 0.384 ::  AUTOLOAD Class[ Repository ] File [ Main/PHP/Repository.class.php ]
+2013-06-13 22:27:04 0.396 ::  AUTOLOAD Class[ Transaction ] File [ Main/PHP/Transaction.class.php ]
+2013-06-13 22:27:04 0.397 ::  AUTOLOAD Class[ Connection ] File [ Main/PHP/Connection.class.php ]
+2013-06-13 22:27:04 0.431 ::  Transaction [ Begin: mysql ]
+2013-06-13 22:27:04 0.438 ::  Status[ OK ] Results[ 1 ] Query[ SELECT * FROM configuracao WHERE 1 LIMIT 1 ]
+2013-06-13 22:27:04 0.438 ::  Transaction [ Commit ]
+2013-06-13 22:27:04 0.438 ::  Teste Conexao Servidor Mysql [ TRUE ]
+2013-06-13 22:27:05 0.888 ::  AUTOLOAD Class[ Log ] File [ Main/PHP/Log.class.php ]
+2013-06-13 22:27:05 0.888 ::  AUTOLOAD Class[ Configuracoes ] File [ Main/PHP/Configuracoes.class.php ]
+2013-06-13 22:27:05 0.888 ::  Class[ Configuracoes ] Method[ __construct ]
+
+Array __REQUEST
+[classe] = "Configuracoes"
+[action] = "recupera_configuracoes"
+2013-06-13 22:27:05 0.889 ::  AUTOLOAD Class[ Repository ] File [ Main/PHP/Repository.class.php ]
+2013-06-13 22:27:05 0.889 ::  AUTOLOAD Class[ Transaction ] File [ Main/PHP/Transaction.class.php ]
+2013-06-13 22:27:05 0.890 ::  AUTOLOAD Class[ Connection ] File [ Main/PHP/Connection.class.php ]
+2013-06-13 22:27:05 0.890 ::  Transaction [ Begin: mysql ]
+2013-06-13 22:27:05 0.891 ::  Status[ OK ] Results[ 13 ] Query[ SELECT * FROM configuracao ]
+2013-06-13 22:27:05 0.891 ::  Transaction [ Commit ]
+2013-06-13 23:04:14 0.809 ::  AUTOLOAD Class[ Log ] File [ Main/PHP/Log.class.php ]
+2013-06-13 23:04:14 0.905 ::  AUTOLOAD Class[ Configuracoes ] File [ Main/PHP/Configuracoes.class.php ]
+2013-06-13 23:04:14 0.906 ::  Class[ Configuracoes ] Method[ __construct ]
+
+Array __REQUEST
+[classe] = "Configuracoes"
+[action] = "recupera_configuracoes"
+2013-06-13 23:04:14 0.909 ::  AUTOLOAD Class[ Repository ] File [ Main/PHP/Repository.class.php ]
+2013-06-13 23:04:14 0.911 ::  AUTOLOAD Class[ Transaction ] File [ Main/PHP/Transaction.class.php ]
+2013-06-13 23:04:14 0.913 ::  AUTOLOAD Class[ Connection ] File [ Main/PHP/Connection.class.php ]
+2013-06-13 23:04:14 0.984 ::  Transaction [ Begin: mysql ]
+2013-06-13 23:04:14 0.990 ::  Status[ OK ] Results[ 13 ] Query[ SELECT * FROM configuracao ]
+2013-06-13 23:04:14 0.990 ::  Transaction [ Commit ]
+2013-06-13 23:14:07 0.317 ::  AUTOLOAD Class[ Log ] File [ Main/PHP/Log.class.php ]
+2013-06-13 23:14:07 0.317 ::  AUTOLOAD Class[ Common ] File [ Main/PHP/Common.class.php ]
+2013-06-13 23:14:07 0.317 ::  Class[Common] Method[__construct]
+
+Array __REQUEST
+[classe] = "Common"
+[action] = "verifica_servidor_mysql"
+2013-06-13 23:14:07 0.318 ::  AUTOLOAD Class[ Repository ] File [ Main/PHP/Repository.class.php ]
+2013-06-13 23:14:07 0.319 ::  AUTOLOAD Class[ Transaction ] File [ Main/PHP/Transaction.class.php ]
+2013-06-13 23:14:07 0.319 ::  AUTOLOAD Class[ Connection ] File [ Main/PHP/Connection.class.php ]
+2013-06-13 23:14:07 0.325 ::  Transaction [ Begin: mysql ]
+2013-06-13 23:14:07 0.326 ::  Status[ OK ] Results[ 1 ] Query[ SELECT * FROM configuracao WHERE 1 LIMIT 1 ]
+2013-06-13 23:14:07 0.326 ::  Transaction [ Commit ]
+2013-06-13 23:14:07 0.326 ::  Teste Conexao Servidor Mysql [ TRUE ]
+2013-06-13 23:14:07 0.878 ::  AUTOLOAD Class[ Log ] File [ Main/PHP/Log.class.php ]
+2013-06-13 23:14:07 0.879 ::  AUTOLOAD Class[ Configuracoes ] File [ Main/PHP/Configuracoes.class.php ]
+2013-06-13 23:14:07 0.879 ::  Class[ Configuracoes ] Method[ __construct ]
+
+Array __REQUEST
+[classe] = "Configuracoes"
+[action] = "recupera_configuracoes"
+2013-06-13 23:14:07 0.880 ::  AUTOLOAD Class[ Repository ] File [ Main/PHP/Repository.class.php ]
+2013-06-13 23:14:07 0.880 ::  AUTOLOAD Class[ Transaction ] File [ Main/PHP/Transaction.class.php ]
+2013-06-13 23:14:07 0.881 ::  AUTOLOAD Class[ Connection ] File [ Main/PHP/Connection.class.php ]
+2013-06-13 23:14:07 0.882 ::  Transaction [ Begin: mysql ]
+2013-06-13 23:14:07 0.883 ::  Status[ OK ] Results[ 13 ] Query[ SELECT * FROM configuracao ]
+2013-06-13 23:14:07 0.883 ::  Transaction [ Commit ]
+2013-06-13 23:14:45 0.824 ::  AUTOLOAD Class[ Log ] File [ Main/PHP/Log.class.php ]
+2013-06-13 23:14:45 0.824 ::  AUTOLOAD Class[ ClientAndroid ] File [ Main/Modulos/ClientAndroid/ClientAndroid.class.php ]
+2013-06-13 23:14:45 0.833 ::  AUTOLOAD Class[ Catalogos ] File [ Main/Modulos/Produtos/Catalogos.class.php ]
+2013-06-13 23:14:45 0.833 ::  Class[ Catalogos ] Method[ getCatalogoAtual ]
+2013-06-13 23:14:45 0.834 ::  AUTOLOAD Class[ Repository ] File [ Main/PHP/Repository.class.php ]
+2013-06-13 23:14:45 0.834 ::  Repository [ Paginacao: 0 ]
+2013-06-13 23:14:45 0.834 ::  AUTOLOAD Class[ Transaction ] File [ Main/PHP/Transaction.class.php ]
+2013-06-13 23:14:45 0.835 ::  AUTOLOAD Class[ Connection ] File [ Main/PHP/Connection.class.php ]
+2013-06-13 23:14:45 0.837 ::  Transaction [ Begin: mysql ]
+2013-06-13 23:14:45 0.848 ::  Status[ OK ] Results[ 1 ] Query[ SELECT pk_catalogo, dt_inclusao FROM tb_catalogos ORDER BY dt_inclusao DESC LIMIT 1 ]
+2013-06-13 23:14:45 0.849 ::  Transaction [ Commit ]
+2013-06-13 23:14:45 0.849 ::  Catalogo Mais Atual. pk_catalogo[ 200 ]
+2013-06-13 23:14:45 0.849 ::  Class[ Catalogos ] Method[ getProdutosCompletoInCatalogoById ]
+2013-06-13 23:14:45 0.849 ::  Class[ Catalogos ] Method[ getCatalogoById ]
+2013-06-13 23:14:45 0.850 ::  Transaction [ Begin: mysql ]
+2013-06-13 23:14:45 0.850 ::  Status[ OK ] Results[ 1 ] Query[ SELECT * FROM tb_catalogos WHERE pk_catalogo = 200 ]
+2013-06-13 23:14:45 0.851 ::  Transaction [ Commit ]
+2013-06-13 23:14:45 0.852 ::  Transaction [ Begin: mysql ]
+2013-06-13 23:14:45 0.978 ::  Status[ OK ] Results[ 1475 ] Query[ SELECT
+                        COUNT(*) as total_count
+                    FROM
+                        tb_produtos a
+                            INNER JOIN
+                        tb_produtos_estoque b ON a.pk_id_produto = b.fk_id_produto
+                            INNER JOIN
+                        tb_produtos_preco c ON a.pk_id_produto = c.fk_id_produto WHERE b.quantidade > 30 AND c.preco > 0 ]
+2013-06-13 23:14:45 0.978 ::  Transaction [ Commit ]
+2013-06-13 23:14:45 0.979 ::  Transaction [ Begin: mysql ]
+2013-06-13 23:14:46 0.108 ::  Status[ OK ] Results[ 1475 ] Query[ SELECT
+                    a.pk_id_produto,
+                    a.pk_id_produto as codigo,
+                    a.fk_id_categoria,
+                    a.descricao_curta,
+                    a.descricao_longa,
+                    b.quantidade,
+                    c.preco
+                FROM
+                    tb_produtos a
+                        INNER JOIN
+                    tb_produtos_estoque b ON a.pk_id_produto = b.fk_id_produto
+                        INNER JOIN
+                    tb_produtos_preco c ON a.pk_id_produto = c.fk_id_produto  WHERE b.quantidade > 30 AND c.preco > 0 ]
+2013-06-13 23:14:46 0.109 ::  Transaction [ Commit ]

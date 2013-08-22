@@ -1,0 +1,43 @@
+#####################################################
+#               CRONOS RETAGUARDA                   #
+# Arquivo de Configuracao de Alias Para o Servidor  #
+# Adicionar as tags abaixo no http.conf             #
+# Ou salve o arquivo em /etc/http/conf.d/cronos.conf#
+# para criar um alias                               # 
+#####################################################
+
+
+#<VirtualHost *:81>
+#    DocumentRoot /var/www/html/cronos/
+#    ServerName ws_informatica
+
+# CONFIGURAÇÃO CRONOS SERVIDOR
+    <Directory "/var/www/html/cronos/">
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Order allow,deny
+        Allow from all
+    </Directory>
+    <Directory "/var/www/html/cronos/ext-3.2.0">
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Order allow,deny
+        Allow from all
+    </Directory>
+    <Directory "/var/www/html/cronos/Engine">
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Order allow,deny
+        Allow from all
+    </Directory>
+    <Directory "/var/www/html/cronos/Engine/Main/Modulos/WebService">
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Order allow,deny
+        Allow from all
+    </Directory>
+
+    Alias /ext-3.2.0 "/var/www/html/cronos/ext-3.2.0/"
+    Alias /cronos "/var/www/html/cronos/Engine/"
+    Alias /webservice "/var/www/html/cronos/Engine/Main/Modulos/WebService"
+#/VirtualHost>

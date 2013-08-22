@@ -1,0 +1,77 @@
+<html>
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link id="favicon" rel="shortcut icon" type="image/ico" href="" />
+
+        <!--css-->
+        <link rel="stylesheet" type="text/css" href="../ext-3.2.0/resources/css/ext-all.css"/>
+        <link rel="stylesheet" type="text/css" href="../ext-3.2.0/shared/icons/silk.css"/>
+        <!--LoginWindow-->
+        <link rel="stylesheet" type="text/css" href="Main/JScript/loginwindow/css/LoginWindow.css"/>
+
+        <title>Cronos</title>
+
+    </head>
+
+    <body>
+
+        <!--ExtJs-->
+        <script type="text/javascript" src="../ext-3.2.0/adapter/ext/ext-base.js"></script>
+        <script type="text/javascript" src="../ext-3.2.0/ext-all.js"></script>
+        <script type="text/javascript" src="../ext-3.2.0/locale/ext-lang-pt_BR.js"></script>
+        <script type="text/javascript" src="../ext-3.2.0/ux/criptografias/Ext.ux.Crypto.SHA1.js"></script>
+
+        <!--Plugins-->
+        <!--LoginWindow-->
+        <script type="text/javascript" src="Main/JScript/loginwindow/LoginWindow.js"></script>
+
+        <script type="text/javascript">
+
+            Ext.onReady(function()
+            {
+                //Inicializar quicktips
+                Ext.QuickTips.init();
+
+                //Recuperando configuracoes
+                Ext.Ajax.request({
+                    url    : 'main.php'
+                    , params : {
+                        classe : 'Configuracoes'
+                        , action: 'recupera_configuracoes'
+                    }
+                    , scope  : this
+                    , success: function(response){
+                        response = Ext.decode(response.responseText);
+                        if( response.success ){
+                            // Trocando Titulo
+                            var titulo = response.Titulo + ' v' + response.Versao_Global;
+                            document.title = titulo;
+                            // Trocando Favicon
+                            var favicon = document.getElementById('favicon');
+                            (newIcon =favicon.cloneNode(true)).setAttribute('href',response.Favicon);
+                            favicon.parentNode.replaceChild(newIcon,favicon);
+                            // Logo do LoginWindow
+
+                            //
+                        }
+                    }
+                });
+
+                new Ext.ux.LoginWindow({
+                    url: 'main.php'
+                    , redirectUrl: 'main.html'
+                    , params:{
+                        classe : 'Usuarios'
+                        , action: 'verifica_login'
+                    }
+                }).show();
+
+            });
+
+        </script>
+
+
+    </body>
+
+</html>

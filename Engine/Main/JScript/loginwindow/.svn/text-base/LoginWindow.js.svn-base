@@ -1,0 +1,227 @@
+/**
+ * Tutorial ensinando a criar uma extensï¿½o de tela de autenticaï¿½ï¿½o
+ * Desenvolvido por Bruno Tavares
+ * Publicado em http://www.extdesenv.com.br
+ */
+
+Ext.ns('Ext.ux');
+
+Ext.ux.LoginWindow = Ext.extend(Ext.Window,{
+
+    width    : 429
+    , height : 295
+    , title  : 'Autentica&ccedil;&atilde;o'
+    , iconCls: 'ico-locked'
+    , layout : 'border'
+
+    , closable : false
+    , resizable: false
+    , draggable: false
+    , modal    : true
+
+    , url    : ''
+    , redirectUrl : 'main.html'
+
+    , constructor: function() {
+
+        Ext.ux.LoginWindow.superclass.constructor.apply(this, arguments);
+    }
+
+    , initComponent: function() {
+
+        Ext.form.Field.prototype.msgTarget = 'side';
+
+        // Setando Cookie
+        this.cp = new Ext.state.CookieProvider({
+            expires: new Date(new Date().getTime()+(1000*60*60*24*30)) //30 dias
+        });
+        Ext.state.Manager.setProvider(this.cp);
+
+        this.logo_panel = new Ext.Panel({
+            baseCls: 'x-plain'
+            , id: 'login_logo'
+            , region: 'center'
+        });
+
+        this.form_panel = new Ext.form.FormPanel({
+
+            id: 'login_form'
+            , region: 'south'
+            , border: false
+            , bodyStyle: "padding: 10px;"
+            , waitMsgTarget: true
+            , labelWidth: 80
+            , buttonAlign: 'center'
+            , baseCls: 'x-plain'
+
+            , height: 120
+
+            , items:[{
+                xtype           : 'textfield'
+                , id            : 'txt_Login'
+                , fieldLabel    : 'Login'
+                , emptyText     : 'Informe seu login'
+                , msgTarget     : 'side'
+                , allowBlank    : false
+                , selectOnFocus : true
+                , width         : 230
+            },{
+                xtype           : 'textfield'
+                , inputType     : 'password'
+                , id            : 'txt_Senha'
+                , fieldLabel    : 'Senha'
+                , emptyText     : 'Informe sua Senha'
+                , msgTarget     : 'side'
+                , allowBlank    : false
+                , selectOnFocus : true
+                , width         : 230
+                , validateOnBlur: false
+                , enableKeyEvents: true
+                , listeners: {
+                    render: function () {
+                        this.capsWarningTooltip = new Ext.ToolTip({
+                            target: this.id
+                            , anchor: 'top'
+                            , width: 305
+                            , html: '<div class="ux-auth-warning">Caps Lock está ativado</div><br />' +
+                        '<div>Atenção, com a tecla Caps Lock ativada voce pode digitar a senha incorreta.</div><br />' +
+                        '<div>Desative a tecla Caps Lock antes de digitar a sua senha.</div>'
+                        });
+
+                        // disable to tooltip from showing on mouseover
+                        this.capsWarningTooltip.disable();
+
+                        // When the password field fires the blur event,
+                        // the tootip gets enabled automatically (possibly an ExtJS bug).
+                        // Disable the tooltip everytime it gets enabled
+                        // The tooltip is shown explicitly by calling show()
+                        // and enabling/disabling does not affect the show() function.
+                        this.capsWarningTooltip.on('enable', function () {
+                            this.disable();
+                        });
+                    }
+                    , keypress: {
+                        fn: function (field, e) {
+                            var charCode = e.getCharCode();
+                            if ((e.shiftKey && charCode >= 97 && charCode <= 122) || (!e.shiftKey && charCode >= 65 && charCode <= 90)) {
+                                field.capsWarningTooltip.show();
+                            }
+                            else {
+                                if (field.capsWarningTooltip.hidden == false) {
+                                    field.capsWarningTooltip.hide();
+                                }
+                            }
+                            if (e.getKey() == e.ENTER) {
+                                this._onBtnEntrarClick();
+                            }
+                        }
+                        , scope: this
+                    }
+                    , blur: function (field) {
+                        if (this.capsWarningTooltip.hidden == false) {
+                            this.capsWarningTooltip.hide();
+                        }
+                    }
+                }
+            },{
+                xtype         : 'checkbox'
+                , id          : 'chk_Lembrar'
+                , name        : 'lembrar_senha'
+                , boxLabel    : '&nbsp; Lembrar Usu&aacute;rio Neste Computador?'
+                , checked     : true
+            }]
+
+        })
+
+        Ext.apply(this,{
+
+            items  : [this.logo_panel,this.form_panel]
+            , buttons: [{
+                xtype    : 'button'
+                , text   : 'Entrar'
+                , iconCls: 'ico-app-go'
+                , scope  : this
+                , handler: this._onBtnEntrarClick
+            }]
+        })
+        Ext.ux.LoginWindow.superclass.initComponent.call(this);
+    }
+
+    , _onBtnEntrarClick: function(){
+
+        var txtLogin = Ext.getCmp('txt_Login');
+        var txtSenha = Ext.getCmp('txt_Senha');
+        var chkLembrar = Ext.getCmp('chk_Lembrar');
+
+        if(!txtLogin.isValid() && !txtSenha.isValid()) {
+            return false;
+        }
+
+        this.buttons[0].disable();
+
+        Ext.Ajax.request({
+            url    : this.url
+            , method : 'POST'
+            , scope  : this
+            , params : Ext.applyIf({
+                Login       : txtLogin.getValue()
+                , Senha_Crip: Ext.ux.Crypto.SHA1.hash(txtSenha.getValue())
+                //, Senha: Ext.ux.Crypto.SHA1.hash(txtSenha.getValue())
+            },this.params)
+
+            , success: function(response){
+
+                response = Ext.decode(response.responseText);
+
+                if( response.success ){
+                    this.el.mask();
+
+                    // Tratamento para lembrar nome de usuario
+                    if (chkLembrar.getValue() == true){
+                        Ext.state.Manager.set('username', txtLogin.getValue());
+                    }
+                    else {
+                        Ext.state.Manager.clear('username');
+                    }
+                    console.log(response);
+                    window.location.href = this.redirectUrl;
+//                     window.location.href = response.redirect||this.redirectUrl;
+                }
+                else {
+
+                    Ext.Msg.show({
+                        title    :'Falha na autentica&ccedil;&atilde;o'
+                        , msg    : response.message
+                        , buttons: Ext.Msg.OK
+                        , iconCls: 'ico-warning'
+                        , width  : 200
+                    });
+
+                    txtLogin.focus();
+                }
+            }
+            , callback: function() {
+                this.buttons[0].enable();
+            }
+        });
+    }
+
+    , show: function() {
+
+        Ext.ux.LoginWindow.superclass.show.apply(this,arguments);
+
+        // Se Tiver Cookie para usuario atribuir ao field login
+        if (Ext.state.Manager.get('username')){
+            Ext.getCmp('txt_Login').setValue(Ext.state.Manager.get('username'));
+        }
+        else {
+            Ext.getCmp('txt_Login').emptyText = 'Informe seu login';
+        }
+    }
+
+    , onDestroy: function() {
+        Ext.ux.LoginWindow.onDestroy.apply(this,arguments);
+    }
+
+
+});

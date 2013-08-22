@@ -1,0 +1,1 @@
+ALTER TABLE `tb_clientes` CHANGE `st` `status_servidor` INT( 11 ) NOT NULL COMMENT 'Flag que indica se o registro foi exportado ou nao para o servidor. ( 0 - A Enviar | 1 - Enviado )';

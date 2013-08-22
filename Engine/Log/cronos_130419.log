@@ -1,0 +1,192 @@
+2013-04-19 00:08:49 0.151 ::  AUTOLOAD Class[ Log ] File [ Main/PHP/Log.class.php ]
+2013-04-19 00:08:49 0.151 ::  AUTOLOAD Class[ ClientAndroid ] File [ Main/Modulos/ClientAndroid/ClientAndroid.class.php ]
+2013-04-19 00:08:49 0.152 ::  AUTOLOAD Class[ Categoria ] File [ Main/Modulos/Produtos/Categoria.class.php ]
+2013-04-19 00:08:49 0.152 ::  Class[Categoria] Method[getCategorias]
+2013-04-19 00:08:49 0.153 ::  AUTOLOAD Class[ Repository ] File [ Main/PHP/Repository.class.php ]
+2013-04-19 00:08:49 0.154 ::  AUTOLOAD Class[ Transaction ] File [ Main/PHP/Transaction.class.php ]
+2013-04-19 00:08:49 0.154 ::  AUTOLOAD Class[ Connection ] File [ Main/PHP/Connection.class.php ]
+2013-04-19 00:08:49 0.157 ::  Transaction [ Begin: mysql ]
+2013-04-19 00:08:49 0.157 ::  Status[ OK ] Results[ 24 ] Query[ SELECT * FROM tb_produtos_categoria ]
+2013-04-19 00:08:49 0.157 ::  Transaction [ Commit ]
+2013-04-19 00:09:38 0.477 ::  AUTOLOAD Class[ Log ] File [ Main/PHP/Log.class.php ]
+2013-04-19 00:09:38 0.477 ::  AUTOLOAD Class[ ClientAndroid ] File [ Main/Modulos/ClientAndroid/ClientAndroid.class.php ]
+2013-04-19 00:09:38 0.478 ::  AUTOLOAD Class[ Categoria ] File [ Main/Modulos/Produtos/Categoria.class.php ]
+2013-04-19 00:09:38 0.478 ::  Class[Categoria] Method[getCategorias]
+2013-04-19 00:09:38 0.479 ::  AUTOLOAD Class[ Repository ] File [ Main/PHP/Repository.class.php ]
+2013-04-19 00:09:38 0.479 ::  AUTOLOAD Class[ Transaction ] File [ Main/PHP/Transaction.class.php ]
+2013-04-19 00:09:38 0.480 ::  AUTOLOAD Class[ Connection ] File [ Main/PHP/Connection.class.php ]
+2013-04-19 00:09:38 0.480 ::  Transaction [ Begin: mysql ]
+2013-04-19 00:09:38 0.481 ::  Status[ OK ] Results[ 24 ] Query[ SELECT * FROM tb_produtos_categoria ]
+2013-04-19 00:09:38 0.481 ::  Transaction [ Commit ]
+2013-04-19 00:47:19 0.868 ::  AUTOLOAD Class[ Log ] File [ Main/PHP/Log.class.php ]
+2013-04-19 00:47:19 0.868 ::  AUTOLOAD Class[ ClientAndroid ] File [ Main/Modulos/ClientAndroid/ClientAndroid.class.php ]
+2013-04-19 00:47:19 0.870 ::  AUTOLOAD Class[ Catalogos ] File [ Main/Modulos/Produtos/Catalogos.class.php ]
+2013-04-19 00:47:19 0.870 ::  Class[ Catalogos ] Method[ getCatalogoAtual ]
+2013-04-19 00:47:19 0.871 ::  AUTOLOAD Class[ Repository ] File [ Main/PHP/Repository.class.php ]
+2013-04-19 00:47:19 0.872 ::  Repository [ Paginacao: 0 ]
+2013-04-19 00:47:19 0.872 ::  AUTOLOAD Class[ Transaction ] File [ Main/PHP/Transaction.class.php ]
+2013-04-19 00:47:19 0.873 ::  AUTOLOAD Class[ Connection ] File [ Main/PHP/Connection.class.php ]
+2013-04-19 00:47:19 0.873 ::  Transaction [ Begin: mysql ]
+2013-04-19 00:47:19 0.874 ::  Status[ OK ] Results[ 1 ] Query[ SELECT pk_catalogo, dt_inclusao FROM tb_catalogos ORDER BY dt_inclusao DESC LIMIT 1 ]
+2013-04-19 00:47:19 0.874 ::  Transaction [ Commit ]
+2013-04-19 00:47:19 0.874 ::  Catalogo Mais Atual. pk_catalogo[ 200 ]
+2013-04-19 00:47:19 0.874 ::  Class[ Catalogos ] Method[ getProdutosCompletoInCatalogoById ]
+2013-04-19 00:47:19 0.874 ::  Class[ Catalogos ] Method[ getCatalogoById ]
+2013-04-19 00:47:19 0.875 ::  Transaction [ Begin: mysql ]
+2013-04-19 00:47:19 0.875 ::  Status[ OK ] Results[ 1 ] Query[ SELECT * FROM tb_catalogos WHERE pk_catalogo = 200 ]
+2013-04-19 00:47:19 0.876 ::  Transaction [ Commit ]
+2013-04-19 00:47:19 0.876 ::  Transaction [ Begin: mysql ]
+2013-04-19 00:47:19 0.877 ::  Status[ OK ] Results[ 1475 ] Query[ SELECT
+                        COUNT(*) as total_count
+                    FROM
+                        tb_produtos a
+                            INNER JOIN
+                        tb_produtos_estoque b ON a.pk_id_produto = b.fk_id_produto
+                            INNER JOIN
+                        tb_produtos_preco c ON a.pk_id_produto = c.fk_id_produto WHERE b.quantidade > 30 AND c.preco > 0 ]
+2013-04-19 00:47:19 0.877 ::  Transaction [ Commit ]
+2013-04-19 00:47:19 0.877 ::  Transaction [ Begin: mysql ]
+2013-04-19 00:47:19 0.885 ::  Status[ OK ] Results[ 1475 ] Query[ SELECT
+                    a.pk_id_produto,
+                    a.pk_id_produto as codigo,
+                    a.fk_id_categoria,
+                    a.descricao_curta,
+                    a.descricao_longa,
+                    b.quantidade,
+                    c.preco
+                FROM
+                    tb_produtos a
+                        INNER JOIN
+                    tb_produtos_estoque b ON a.pk_id_produto = b.fk_id_produto
+                        INNER JOIN
+                    tb_produtos_preco c ON a.pk_id_produto = c.fk_id_produto  WHERE b.quantidade > 30 AND c.preco > 0 ]
+2013-04-19 00:47:19 0.886 ::  Transaction [ Commit ]
+2013-04-19 01:41:44 0.515 ::  AUTOLOAD Class[ Log ] File [ Main/PHP/Log.class.php ]
+2013-04-19 01:41:44 0.515 ::  AUTOLOAD Class[ ClientAndroid ] File [ Main/Modulos/ClientAndroid/ClientAndroid.class.php ]
+2013-04-19 01:41:44 0.516 ::  AUTOLOAD Class[ Catalogos ] File [ Main/Modulos/Produtos/Catalogos.class.php ]
+2013-04-19 01:41:44 0.516 ::  Class[ Catalogos ] Method[ getCatalogoAtual ]
+2013-04-19 01:41:44 0.517 ::  AUTOLOAD Class[ Repository ] File [ Main/PHP/Repository.class.php ]
+2013-04-19 01:41:44 0.517 ::  Repository [ Paginacao: 0 ]
+2013-04-19 01:41:44 0.517 ::  AUTOLOAD Class[ Transaction ] File [ Main/PHP/Transaction.class.php ]
+2013-04-19 01:41:44 0.517 ::  AUTOLOAD Class[ Connection ] File [ Main/PHP/Connection.class.php ]
+2013-04-19 01:41:44 0.518 ::  Transaction [ Begin: mysql ]
+2013-04-19 01:41:44 0.519 ::  Status[ OK ] Results[ 1 ] Query[ SELECT pk_catalogo, dt_inclusao FROM tb_catalogos ORDER BY dt_inclusao DESC LIMIT 1 ]
+2013-04-19 01:41:44 0.519 ::  Transaction [ Commit ]
+2013-04-19 01:41:44 0.519 ::  Catalogo Mais Atual. pk_catalogo[ 200 ]
+2013-04-19 01:41:44 0.519 ::  Class[ Catalogos ] Method[ getProdutosCompletoInCatalogoById ]
+2013-04-19 01:41:44 0.519 ::  Class[ Catalogos ] Method[ getCatalogoById ]
+2013-04-19 01:41:44 0.520 ::  Transaction [ Begin: mysql ]
+2013-04-19 01:41:44 0.521 ::  Status[ OK ] Results[ 1 ] Query[ SELECT * FROM tb_catalogos WHERE pk_catalogo = 200 ]
+2013-04-19 01:41:44 0.521 ::  Transaction [ Commit ]
+2013-04-19 01:41:44 0.522 ::  Transaction [ Begin: mysql ]
+2013-04-19 01:41:44 0.522 ::  Status[ OK ] Results[ 1475 ] Query[ SELECT
+                        COUNT(*) as total_count
+                    FROM
+                        tb_produtos a
+                            INNER JOIN
+                        tb_produtos_estoque b ON a.pk_id_produto = b.fk_id_produto
+                            INNER JOIN
+                        tb_produtos_preco c ON a.pk_id_produto = c.fk_id_produto WHERE b.quantidade > 30 AND c.preco > 0 ]
+2013-04-19 01:41:44 0.523 ::  Transaction [ Commit ]
+2013-04-19 01:41:44 0.524 ::  Transaction [ Begin: mysql ]
+2013-04-19 01:41:44 0.530 ::  Status[ OK ] Results[ 1475 ] Query[ SELECT
+                    a.pk_id_produto,
+                    a.pk_id_produto as codigo,
+                    a.fk_id_categoria,
+                    a.descricao_curta,
+                    a.descricao_longa,
+                    b.quantidade,
+                    c.preco
+                FROM
+                    tb_produtos a
+                        INNER JOIN
+                    tb_produtos_estoque b ON a.pk_id_produto = b.fk_id_produto
+                        INNER JOIN
+                    tb_produtos_preco c ON a.pk_id_produto = c.fk_id_produto  WHERE b.quantidade > 30 AND c.preco > 0 ]
+2013-04-19 01:41:44 0.530 ::  Transaction [ Commit ]
+2013-04-19 01:52:23 0.863 ::  AUTOLOAD Class[ Log ] File [ Main/PHP/Log.class.php ]
+2013-04-19 01:52:23 0.863 ::  AUTOLOAD Class[ ClientAndroid ] File [ Main/Modulos/ClientAndroid/ClientAndroid.class.php ]
+2013-04-19 01:52:23 0.865 ::  AUTOLOAD Class[ Catalogos ] File [ Main/Modulos/Produtos/Catalogos.class.php ]
+2013-04-19 01:52:23 0.865 ::  Class[ Catalogos ] Method[ getCatalogoAtual ]
+2013-04-19 01:52:23 0.866 ::  AUTOLOAD Class[ Repository ] File [ Main/PHP/Repository.class.php ]
+2013-04-19 01:52:23 0.866 ::  Repository [ Paginacao: 0 ]
+2013-04-19 01:52:23 0.867 ::  AUTOLOAD Class[ Transaction ] File [ Main/PHP/Transaction.class.php ]
+2013-04-19 01:52:23 0.867 ::  AUTOLOAD Class[ Connection ] File [ Main/PHP/Connection.class.php ]
+2013-04-19 01:52:23 0.868 ::  Transaction [ Begin: mysql ]
+2013-04-19 01:52:23 0.868 ::  Status[ OK ] Results[ 1 ] Query[ SELECT pk_catalogo, dt_inclusao FROM tb_catalogos ORDER BY dt_inclusao DESC LIMIT 1 ]
+2013-04-19 01:52:23 0.868 ::  Transaction [ Commit ]
+2013-04-19 01:52:23 0.868 ::  Catalogo Mais Atual. pk_catalogo[ 200 ]
+2013-04-19 01:52:23 0.869 ::  Class[ Catalogos ] Method[ getProdutosCompletoInCatalogoById ]
+2013-04-19 01:52:23 0.869 ::  Class[ Catalogos ] Method[ getCatalogoById ]
+2013-04-19 01:52:23 0.869 ::  Transaction [ Begin: mysql ]
+2013-04-19 01:52:23 0.870 ::  Status[ OK ] Results[ 1 ] Query[ SELECT * FROM tb_catalogos WHERE pk_catalogo = 200 ]
+2013-04-19 01:52:23 0.870 ::  Transaction [ Commit ]
+2013-04-19 01:52:23 0.871 ::  Transaction [ Begin: mysql ]
+2013-04-19 01:52:23 0.871 ::  Status[ OK ] Results[ 1475 ] Query[ SELECT
+                        COUNT(*) as total_count
+                    FROM
+                        tb_produtos a
+                            INNER JOIN
+                        tb_produtos_estoque b ON a.pk_id_produto = b.fk_id_produto
+                            INNER JOIN
+                        tb_produtos_preco c ON a.pk_id_produto = c.fk_id_produto WHERE b.quantidade > 30 AND c.preco > 0 ]
+2013-04-19 01:52:23 0.871 ::  Transaction [ Commit ]
+2013-04-19 01:52:23 0.872 ::  Transaction [ Begin: mysql ]
+2013-04-19 01:52:23 0.879 ::  Status[ OK ] Results[ 1475 ] Query[ SELECT
+                    a.pk_id_produto,
+                    a.pk_id_produto as codigo,
+                    a.fk_id_categoria,
+                    a.descricao_curta,
+                    a.descricao_longa,
+                    b.quantidade,
+                    c.preco
+                FROM
+                    tb_produtos a
+                        INNER JOIN
+                    tb_produtos_estoque b ON a.pk_id_produto = b.fk_id_produto
+                        INNER JOIN
+                    tb_produtos_preco c ON a.pk_id_produto = c.fk_id_produto  WHERE b.quantidade > 30 AND c.preco > 0 ]
+2013-04-19 01:52:23 0.879 ::  Transaction [ Commit ]
+2013-04-19 01:59:59 0.088 ::  AUTOLOAD Class[ Log ] File [ Main/PHP/Log.class.php ]
+2013-04-19 01:59:59 0.088 ::  AUTOLOAD Class[ ClientAndroid ] File [ Main/Modulos/ClientAndroid/ClientAndroid.class.php ]
+2013-04-19 01:59:59 0.090 ::  AUTOLOAD Class[ Catalogos ] File [ Main/Modulos/Produtos/Catalogos.class.php ]
+2013-04-19 01:59:59 0.091 ::  Class[ Catalogos ] Method[ getCatalogoAtual ]
+2013-04-19 01:59:59 0.092 ::  AUTOLOAD Class[ Repository ] File [ Main/PHP/Repository.class.php ]
+2013-04-19 01:59:59 0.092 ::  Repository [ Paginacao: 0 ]
+2013-04-19 01:59:59 0.092 ::  AUTOLOAD Class[ Transaction ] File [ Main/PHP/Transaction.class.php ]
+2013-04-19 01:59:59 0.092 ::  AUTOLOAD Class[ Connection ] File [ Main/PHP/Connection.class.php ]
+2013-04-19 01:59:59 0.093 ::  Transaction [ Begin: mysql ]
+2013-04-19 01:59:59 0.093 ::  Status[ OK ] Results[ 1 ] Query[ SELECT pk_catalogo, dt_inclusao FROM tb_catalogos ORDER BY dt_inclusao DESC LIMIT 1 ]
+2013-04-19 01:59:59 0.094 ::  Transaction [ Commit ]
+2013-04-19 01:59:59 0.094 ::  Catalogo Mais Atual. pk_catalogo[ 200 ]
+2013-04-19 01:59:59 0.094 ::  Class[ Catalogos ] Method[ getProdutosCompletoInCatalogoById ]
+2013-04-19 01:59:59 0.094 ::  Class[ Catalogos ] Method[ getCatalogoById ]
+2013-04-19 01:59:59 0.095 ::  Transaction [ Begin: mysql ]
+2013-04-19 01:59:59 0.095 ::  Status[ OK ] Results[ 1 ] Query[ SELECT * FROM tb_catalogos WHERE pk_catalogo = 200 ]
+2013-04-19 01:59:59 0.095 ::  Transaction [ Commit ]
+2013-04-19 01:59:59 0.096 ::  Transaction [ Begin: mysql ]
+2013-04-19 01:59:59 0.096 ::  Status[ OK ] Results[ 1475 ] Query[ SELECT
+                        COUNT(*) as total_count
+                    FROM
+                        tb_produtos a
+                            INNER JOIN
+                        tb_produtos_estoque b ON a.pk_id_produto = b.fk_id_produto
+                            INNER JOIN
+                        tb_produtos_preco c ON a.pk_id_produto = c.fk_id_produto WHERE b.quantidade > 30 AND c.preco > 0 ]
+2013-04-19 01:59:59 0.096 ::  Transaction [ Commit ]
+2013-04-19 01:59:59 0.097 ::  Transaction [ Begin: mysql ]
+2013-04-19 01:59:59 0.103 ::  Status[ OK ] Results[ 1475 ] Query[ SELECT
+                    a.pk_id_produto,
+                    a.pk_id_produto as codigo,
+                    a.fk_id_categoria,
+                    a.descricao_curta,
+                    a.descricao_longa,
+                    b.quantidade,
+                    c.preco
+                FROM
+                    tb_produtos a
+                        INNER JOIN
+                    tb_produtos_estoque b ON a.pk_id_produto = b.fk_id_produto
+                        INNER JOIN
+                    tb_produtos_preco c ON a.pk_id_produto = c.fk_id_produto  WHERE b.quantidade > 30 AND c.preco > 0 ]
+2013-04-19 01:59:59 0.104 ::  Transaction [ Commit ]
