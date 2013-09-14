@@ -204,6 +204,7 @@ class ClientAndroid {
             $result->msg  = "Desculpe mas houve uma Falha, não foi possivel gravar o registro...";
             $result->descricao = $erro;
             $result->entidade = 'pedidos';
+            $result->status = 9; // Enviado Com Erro
             die(json_encode($result));
         }
         else {
@@ -212,9 +213,10 @@ class ClientAndroid {
             $result->id = $pedido->id_original;
             $result->id_servidor = $pedido_id;
             $result->dt_envio = $pedido->dt_envio;
+            $result->status = 2; // Enviado
             $result->entidade = 'pedidos';
         }
-        sleep(5);
+        sleep(2);
         echo json_encode($result);
     }
 
@@ -354,6 +356,7 @@ class ClientAndroid {
                 $result->descricao = $erro;
             }
         }
+        sleep(2);
         die(json_encode($result));
     }
 
