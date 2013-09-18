@@ -25,16 +25,14 @@ class ClientAndroid {
         $vendedores = Usuarios::getUsuarioByGrupo($grupo_vendedores, false);
 
         $result = new StdClass();
-
+        $result->entidade = 'vendedores';
 
         if (count($vendedores) > 0){
             $result->success = true;
-            $result->entidade = 'vendedores';
             $result->rows = $vendedores;
         }
         else {
             $result->success = false;
-            $result->entidade = 'vendedores';
         }
         echo json_encode($result);
     }
@@ -47,12 +45,14 @@ class ClientAndroid {
      */
     public function getDepartamentos($data){
 
+        $result = new StdClass();
+        $result->entidade = 'departamentos';
+
         $aDepartamentos = Categoria::getCategorias(false);
 
         foreach ($aDepartamentos as $departamento){
 
             $record = new StdClass();
-
             $record->_id = $departamento->pk_id_categoria;
             $record->departamento = ucwords(strtolower($departamento->categoria));
 
@@ -84,6 +84,9 @@ class ClientAndroid {
      * $preco: preco de venda do produto
      */
     public function getProdutos($data){
+
+        $result = new StdClass();
+        $result->entidade = 'produtos';
 
         // Recuperar o catalogo atual
         $id_catalogo = Catalogos::getCatalogoAtual();
@@ -146,6 +149,43 @@ class ClientAndroid {
         echo json_encode($result);
     }
 
+    /** getClientes()
+     * Recupera os Clientes para um vendedor
+     * @param: int id_vendedor
+     * @return: array() de obj Clientes
+     */
+    public function getClientes($data){
+
+        $result = new StdClass();
+        $result->entidade = 'pullclientes';
+
+//         $aDepartamentos = Categoria::getCategorias(false);
+// 
+//         foreach ($aDepartamentos as $departamento){
+// 
+//             $record = new StdClass();
+//             $record->_id = $departamento->pk_id_categoria;
+//             $record->departamento = ucwords(strtolower($departamento->categoria));
+// 
+//             $aRecords[] = $record;
+//         }
+// 
+//         if (count($aRecords) > 0){
+//             $result->success = true;
+//             $result->rows = $aRecords;
+//         }
+//         else {
+//             $result->success = false;
+//         }
+        $result->success = true;
+        $result->rows = $aRecords;
+
+        echo json_encode($result);
+    }
+
+
+// -----------------------< SETERS >----------------------- //
+
     /** setPedidos()
      */
     public function setPedidos($data){
@@ -154,6 +194,7 @@ class ClientAndroid {
         $data = json_decode($_REQUEST['data']);
 
         $result = new StdClass();
+        $result->entidade = 'pedidos';
 
         $pedido = new StdClass();
         $pedido->id_original   = $data->id;
@@ -203,7 +244,6 @@ class ClientAndroid {
             $result->success = false;
             $result->msg  = "Desculpe mas houve uma Falha, não foi possivel gravar o registro...";
             $result->descricao = $erro;
-            $result->entidade = 'pedidos';
             $result->status = 9; // Enviado Com Erro
             die(json_encode($result));
         }
@@ -214,9 +254,7 @@ class ClientAndroid {
             $result->id_servidor = $pedido_id;
             $result->dt_envio = $pedido->dt_envio;
             $result->status = 2; // Enviado
-            $result->entidade = 'pedidos';
         }
-        sleep(2);
         echo json_encode($result);
     }
 
@@ -228,10 +266,8 @@ class ClientAndroid {
 
         $data = json_decode($_REQUEST['data']);
 
-        //Log::Msg(3, "Data = {$data->nome}");
-
-
         $result = new StdClass();
+        $result->entidade = 'clientes';
 
         $cliente = new StdClass();
         $cliente->id_original  = $data->id;
@@ -292,7 +328,6 @@ class ClientAndroid {
 
                     $record->commit();
                     $result->success = true;
-                    $result->entidade = 'clientes';
                     $result->id = $cliente->id_original;
                     $result->id_servidor = $id_cliente;
                 }
@@ -302,7 +337,6 @@ class ClientAndroid {
                     $result->success = false;
                     $result->msg  = "Desculpe mas houve uma Falha, não foi possivel gravar o registro...";
                     $result->descricao = $erro;
-                    $result->entidade = 'clientes';
                 }
             }
             else {
@@ -310,7 +344,6 @@ class ClientAndroid {
                 $erro = "Falha ao Alterar o Cliente [ {$data->nome} ] QUERY [ $sql_update ]";
                 $record->rollback();
                 $result->success = false;
-                $result->entidade = 'clientes';
                 $result->msg  = "Desculpe mas houve uma Falha, não foi possivel gravar o registro...";
                 $result->descricao = $erro;
             }
@@ -333,7 +366,6 @@ class ClientAndroid {
 
                     $record->commit();
                     $result->success = true;
-                    $result->entidade = 'clientes';
                     $result->id = $cliente->id_original;
                     $result->id_servidor = $id_cliente;
                 }
@@ -343,7 +375,6 @@ class ClientAndroid {
                     $result->success = false;
                     $result->msg  = "Desculpe mas houve uma Falha, não foi possivel gravar o registro...";
                     $result->descricao = $erro;
-                    $result->entidade = 'clientes';
                 }
             }
             else {
@@ -351,12 +382,10 @@ class ClientAndroid {
                 $erro = "Falha ao Inserir o Cliente [ {$data->nome} ] QUERY [ $sql_insert ]";
                 $record->rollback();
                 $result->success = false;
-                $result->entidade = 'clientes';
                 $result->msg  = "Desculpe mas houve uma Falha, não foi possivel gravar o registro...";
                 $result->descricao = $erro;
             }
         }
-        sleep(2);
         die(json_encode($result));
     }
 
