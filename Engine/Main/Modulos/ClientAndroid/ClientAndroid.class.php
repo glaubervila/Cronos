@@ -111,31 +111,31 @@ class ClientAndroid {
             $record->image_size = 0;
 
 
-//             $aRecords[] = $record;
+            $aRecords[] = $record;
         }
-        $record = new StdClass();
-        $record->_id = 291;
-        $record->codigo = 291;
-        $record->categoria_id = 1000;
-        $record->descricao_curta = "CADERNO 48F 1.4 HZ C";
-        $record->descricao = "CADERNO 48F 1.4 HZ CALIGRAFIA KAJOMA";
-        $record->quantidade = 80;
-        $record->preco = 0.89;
-        $record->image_name = str_pad($record->_id, 6, "0", STR_PAD_LEFT);
-        $record->image_size = 0;
-        $aRecords[] = $record;
-
-        $record = new StdClass();
-        $record->_id = 376;
-        $record->codigo = 376;
-        $record->categoria_id = 1000;
-        $record->descricao_curta = "CADERNO 48F 1.4 HZ C";
-        $record->descricao = "CADERNO 48F 1.4 HZ CALIGRAFIA KAJOMA";
-        $record->quantidade = 80;
-        $record->preco = 0.89;
-        $record->image_name = str_pad($record->_id, 6, "0", STR_PAD_LEFT);
-        $record->image_size = 0;
-        $aRecords[] = $record;
+//         $record = new StdClass();
+//         $record->_id = 291;
+//         $record->codigo = 291;
+//         $record->categoria_id = 1000;
+//         $record->descricao_curta = "CADERNO 48F 1.4 HZ C";
+//         $record->descricao = "CADERNO 48F 1.4 HZ CALIGRAFIA KAJOMA";
+//         $record->quantidade = 80;
+//         $record->preco = 0.89;
+//         $record->image_name = str_pad($record->_id, 6, "0", STR_PAD_LEFT);
+//         $record->image_size = 0;
+//         $aRecords[] = $record;
+// 
+//         $record = new StdClass();
+//         $record->_id = 376;
+//         $record->codigo = 376;
+//         $record->categoria_id = 1000;
+//         $record->descricao_curta = "CADERNO 48F 1.4 HZ C";
+//         $record->descricao = "CADERNO 48F 1.4 HZ CALIGRAFIA KAJOMA";
+//         $record->quantidade = 80;
+//         $record->preco = 0.89;
+//         $record->image_name = str_pad($record->_id, 6, "0", STR_PAD_LEFT);
+//         $record->image_size = 0;
+//         $aRecords[] = $record;
 
 
         if (count($aRecords) > 0){
