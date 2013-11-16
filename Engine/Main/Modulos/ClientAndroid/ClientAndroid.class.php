@@ -95,6 +95,7 @@ class ClientAndroid {
         // Buscar todos os produtos que correspondem a regra do catalogo
         $aProdutos = Catalogos::getProdutosCompletoInCatalogoById($id_catalogo);
 
+        $ignorados = 0;
         foreach ($aProdutos as $produto){
 
             $record = new StdClass();
@@ -110,32 +111,39 @@ class ClientAndroid {
             $record->image_name = str_pad($produto->pk_id_produto, 6, "0", STR_PAD_LEFT);
             $record->image_size = 0;
 
-
-           // $aRecords[] = $record;
+            // TODO: Verificar se o produto tem imagem
+            if ($produto->url_image != 'Main/Data/Imagens_Produtos/000000.jpg') {
+                $aRecords[] = $record;
+            }
+            else {
+                Log::Msg(3, "PRODUTO IGNORADO [{$produto->pk_id_produto}]");
+                $ignorados++;
+            }
         }
-         $record = new StdClass();
-         $record->_id = 291;
-         $record->codigo = 291;
-         $record->categoria_id = 1000;
-         $record->descricao_curta = "CADERNO 48F 1.4 HZ C";
-         $record->descricao = "CADERNO 48F 1.4 HZ CALIGRAFIA KAJOMA";
-         $record->quantidade = 80;
-         $record->preco = 0.89;
-         $record->image_name = str_pad($record->_id, 6, "0", STR_PAD_LEFT);
-         $record->image_size = 0;
-         $aRecords[] = $record;
- 
-         $record = new StdClass();
-         $record->_id = 376;
-         $record->codigo = 376;
-         $record->categoria_id = 1000;
-         $record->descricao_curta = "CADERNO 48F 1.4 HZ C";
-         $record->descricao = "CADERNO 48F 1.4 HZ CALIGRAFIA KAJOMA";
-         $record->quantidade = 80;
-         $record->preco = 0.89;
-         $record->image_name = str_pad($record->_id, 6, "0", STR_PAD_LEFT);
-         $record->image_size = 0;
-         $aRecords[] = $record;
+        Log::Msg(3, "PRODUTOS IGNORADOS [{ignorados}]");
+//          $record = new StdClass();
+//          $record->_id = 291;
+//          $record->codigo = 291;
+//          $record->categoria_id = 1000;
+//          $record->descricao_curta = "CADERNO 48F 1.4 HZ C";
+//          $record->descricao = "CADERNO 48F 1.4 HZ CALIGRAFIA KAJOMA";
+//          $record->quantidade = 80;
+//          $record->preco = 0.89;
+//          $record->image_name = str_pad($record->_id, 6, "0", STR_PAD_LEFT);
+//          $record->image_size = 0;
+//          $aRecords[] = $record;
+// 
+//          $record = new StdClass();
+//          $record->_id = 376;
+//          $record->codigo = 376;
+//          $record->categoria_id = 1000;
+//          $record->descricao_curta = "CADERNO 48F 1.4 HZ C";
+//          $record->descricao = "CADERNO 48F 1.4 HZ CALIGRAFIA KAJOMA";
+//          $record->quantidade = 80;
+//          $record->preco = 0.89;
+//          $record->image_name = str_pad($record->_id, 6, "0", STR_PAD_LEFT);
+//          $record->image_size = 0;
+//          $aRecords[] = $record;
 
 
         if (count($aRecords) > 0){
@@ -158,57 +166,63 @@ class ClientAndroid {
         Log::Msg(2,"Class[ ClientAndroid ] Method[ getClientes() ]");
         Log::Msg(4, $_REQUEST);
         $data = json_decode($_REQUEST['data']);
-		$record = new Repository();
-		
+        $record = new Repository();
+
         $result = new StdClass();
         $result->entidade = 'pullclientes';
-	
-		Log::Msg(3, "VENDEDOR [{$data->id_vendedor}]");
-	
-		$sql = "SELECT * FROM tb_clientes INNER JOIN tb_endereco ON tb_clientes.pk_id_cliente = tb_endereco.id_referencia_pk WHERE vendedor = {$data->id_vendedor}";
+        $aRecords = array();
+
+        Log::Msg(3, "VENDEDOR [{$data->id_vendedor}] Total Clientes [ {$data->total_clientes} ]");
+
+        $sql = "SELECT COUNT(*) FROM tb_clientes INNER JOIN tb_endereco ON tb_clientes.pk_id_cliente = tb_endereco.id_referencia_pk WHERE vendedor = {$data->id_vendedor}";
 
         $results = $record->load($sql);
+        if ($results->count > $data->total_clientes) {
+            $diferenca = $results->count - $data->total_clientes;
+            Log::Msg(3, "Tem [$diferenca] Clientes a Atualizar");
+            $sql = "SELECT * FROM tb_clientes INNER JOIN tb_endereco ON tb_clientes.pk_id_cliente = tb_endereco.id_referencia_pk WHERE vendedor = {$data->id_vendedor}";
 
-		$aRecords = array();
-		if ($results->count != 0) {
-			foreach ($results->rows as $record){
- 
-				$cliente = new StdClass();
-				//$cliente->id          = $record->id_original;
-				$cliente->id_servidor = $record->pk_id_cliente;
-				$cliente->id_usuario  = $record->fk_id_usuario;
-				$cliente->tipo        = $record->tipo;
-				//$cliente->tipo_cliente = $data->tipo; ???
-				//$cliente->status = $data->nome; ???
-				$cliente->nome        = ucwords(strtolower($record->nome));
-				$cliente->cpf         = $record->cpf;
-				$cliente->cnpj        = $record->cnpj;
-				$cliente->rg          = $record->rg;
-				$cliente->inscricao_estadual = $record->inscricao_estadual;
-				$cliente->telefone_fixo = $record->telefone_fixo;
-				$cliente->telefone_movel = $record->telefone_movel;
-				$cliente->email       = $record->email;
-				//$cliente->status_servidor = $record->status_servidor;
-				$cliente->status_servidor = 1;
-				$cliente->responsavel = $record->responsavel;
-				$cliente->dt_inclusao = $record->dt_inclusao;
-				$cliente->observacoes = $record->observacoes;
-				$cliente->vendedor    = $record->vendedor;
-				$cliente->rua         = $record->rua;
-				$cliente->numero      = $record->numero;
-				$cliente->bairro      = $record->bairro;
-				$cliente->cidade      = $record->cidade;
-				//$cliente->uf          = $record->uf;
-				$cliente->uf          = 18;
-				$cliente->cep         = $record->cep;
-				$cliente->complemento = $record->complemento;
+            $results = $record->load($sql);
 
-				$aRecords[] = $cliente;
-			}
-		}
-		
-		$result->success = true;
-		$result->rows = $aRecords;
+            if ($results->count != 0) {
+                foreach ($results->rows as $record){
+
+                    $cliente = new StdClass();
+                    //$cliente->id          = $record->id_original;
+                    $cliente->id_servidor = $record->pk_id_cliente;
+                    $cliente->id_usuario  = $record->fk_id_usuario;
+                    $cliente->tipo        = $record->tipo;
+                    //$cliente->tipo_cliente = $data->tipo; ???
+                    //$cliente->status = $data->nome; ???
+                    $cliente->nome        = ucwords(strtolower($record->nome));
+                    $cliente->cpf         = $record->cpf;
+                    $cliente->cnpj        = $record->cnpj;
+                    $cliente->rg          = $record->rg;
+                    $cliente->inscricao_estadual = $record->inscricao_estadual;
+                    $cliente->telefone_fixo = $record->telefone_fixo;
+                    $cliente->telefone_movel = $record->telefone_movel;
+                    $cliente->email       = $record->email;
+                    //$cliente->status_servidor = $record->status_servidor;
+                    $cliente->status_servidor = 1;
+                    $cliente->responsavel = $record->responsavel;
+                    $cliente->dt_inclusao = $record->dt_inclusao;
+                    $cliente->observacoes = $record->observacoes;
+                    $cliente->vendedor    = $record->vendedor;
+                    $cliente->rua         = $record->rua;
+                    $cliente->numero      = $record->numero;
+                    $cliente->bairro      = $record->bairro;
+                    $cliente->cidade      = $record->cidade;
+                    //$cliente->uf          = $record->uf;
+                    $cliente->uf          = 18;
+                    $cliente->cep         = $record->cep;
+                    $cliente->complemento = $record->complemento;
+
+                    $aRecords[] = $cliente;
+                }
+            }
+        }
+        $result->success = true;
+        $result->rows = $aRecords;
 
         echo json_encode($result);
     }
@@ -432,4 +446,82 @@ class ClientAndroid {
     public function codificacao($string) {
         return mb_detect_encoding($string.'x', 'UTF-8, ISO-8859-1');
     }
+
+
+/**Função usada para trocar os id de clientes para auto increment
+**/
+//     public function ImportarClientes(){
+//         Log::Msg(2,"ImportarClientes");
+//         Log::Msg(4, $_REQUEST);
+//         $data = json_decode($_REQUEST['data']);
+//         $record = new Repository();
+// 
+//         $result = new StdClass();
+// 
+//         $sql = "SELECT * FROM temp_clientes INNER JOIN temp_endereco ON temp_clientes.pk_id_cliente = temp_endereco.id_referencia_pk";
+// 
+//         $results = $record->load($sql);
+// 
+//         $aRecords = array();
+// 
+//         Log::Msg(3, "TOTAL A IMPORTAL = {$results->count}");
+// 
+//         $record->setCommit(0);
+// 
+//         if ($results->count != 0) {
+//             foreach ($results->rows as $cliente){
+// 
+//                 Log::Msg(3, "Codigo [{$cliente->pk_id_cliente}] Endereco [{$cliente->id_endereco}] Nome [{$cliente->nome}]");
+// 
+// 
+//                 $sql_insert = "INSERT INTO tb_clientes (pk_id_cliente , fk_id_loja, fk_id_endereco, fk_id_usuario, tipo, tipo_cliente, status, nome, cpf, cnpj, rg, inscricao_estadual, dt_nascimento, sexo, profissao, estado_civil, telefone_fixo, telefone_movel, email, status_servidor, dt_inclusao, dt_alteracao, observacoes, vendedor ) VALUES (NULL, '{$cliente->fk_id_loja}', '0', '{$cliente->fk_id_usuario}', '{$cliente->tipo}', '{$cliente->tipo_cliente}', '{$cliente->status}', '{$cliente->nome}', '{$cliente->cpf}', '{$cliente->cnpj}', '{$cliente->rg}', '{$cliente->inscricao_estadual}', '{$cliente->dt_nascimento}', '{$cliente->sexo}', '{$cliente->profissao}', '{$cliente->estado_civil}', '{$cliente->telefone_fixo}', '{$cliente->telefone_movel}', '{$cliente->email}', '{$cliente->status_servidor}', NOW(), NOW(), '{$cliente->observacoes}', '{$cliente->vendedor}')";
+// 
+//                 Log::Msg(3, "DEBUG 1");
+//                 $id_cliente = $record->store($sql_insert);
+//                 if ($id_cliente){
+//                     Log::Msg(3, "DEBUG 2");
+//                     $endereco = "INSERT INTO tb_endereco (id_endereco, tipo_endereco, rua, numero, bairro, cidade, uf, cep, complemento, dt_inclusao, dt_alteracao, id_referencia, id_referencia_pk) VALUES (NULL, '{$cliente->tipo}', '{$cliente->rua}',  '{$cliente->numero}', '{$cliente->bairro}', '{$cliente->cidade}', '{$cliente->uf}', '{$cliente->cep}', '{$cliente->complemento}', NOW(), '', 'tb_clientes', '$id_cliente' );";
+// 
+//                     Log::Msg(3, "DEBUG 3");
+//                     $id_endereco = $record->store($endereco);
+// 
+//                     if ($id_endereco){
+//                         Log::Msg(3, "DEBUG 4");
+//                         Log::Msg(3, "Codigo [{$id_cliente}] Endereco [{$id_endereco}] Nome [{$cliente->nome}]");
+// 
+//                         $success++;
+// 
+//                     }
+//                     else {
+//                         $msg = "Falha ao Inserir Endereco Codigo [ {$cliente->pk_id_cliente} ] Cliente [ {$cliente->nome} ] QUERY [ $endereco ]";
+//                         $erros[] = $msg;
+//                         Log::Msg(0, $msg);
+// 
+//                         $failure++;
+//                     }
+//                 }
+//                 else {
+// 
+//                     $msg = "Falha ao Inserir o Codigo [ {$cliente->pk_id_cliente} ] Cliente [ {$cliente->nome} ] QUERY [ $sql_insert ]";
+//                     $erros[] = $msg;
+//                     Log::Msg(3, $msg);
+// 
+//                     $failure++;
+//                 }
+//             }
+// 
+//             if ($failure){
+//                 $record->rollback();
+//                 $result->success = false;
+//                 $result->erros = $erros;
+//             }
+//             else {
+//                 $record->commit();
+//                 $result->success = true;
+//             }
+//         }
+//         echo json_encode($result);
+//     }
+
+
 }
