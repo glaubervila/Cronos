@@ -1344,7 +1344,10 @@ class Orcamentos_Servidor {
         }
 
         // Passo 3 - Informacoes do Destinatario
-        $sql = "SELECT a.*, b.* from tb_clientes a INNER JOIN tb_endereco b ON a.fk_id_endereco = b.id_endereco WHERE pk_id_cliente = {$destinatario}";
+        #$sql = "SELECT a.*, b.* from tb_clientes a INNER JOIN tb_endereco b ON a.fk_id_endereco = b.id_endereco WHERE pk_id_cliente = {$destinatario}";
+        $sql = "SELECT a.*, b.* from tb_clientes a INNER JOIN tb_endereco b ON a.pk_id_cliente = b.id_referencia_pk WHERE pk_id_cliente = {$destinatario}";
+        
+        Log::Msg(3,"TESTE");
         $result = $record->load($sql);
         if ($result->count != 0){
 
