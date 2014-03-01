@@ -636,6 +636,7 @@ Class Catalogos {
                     a.fk_id_categoria,
                     a.descricao_curta,
                     a.descricao_longa,
+                    a.url_image,
                     b.quantidade,
                     c.preco
                 FROM

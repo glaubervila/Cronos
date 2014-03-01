@@ -11,6 +11,7 @@
 
 class ClientAndroid {
 
+    private $images_dir = "Main/Data/Imagens_Produtos/";
 
     /** getVendedores()
      * Retorna um lista com o id e o nome dos usuarios cadastrados no grupo vendedores
@@ -95,7 +96,9 @@ class ClientAndroid {
         // Buscar todos os produtos que correspondem a regra do catalogo
         $aProdutos = Catalogos::getProdutosCompletoInCatalogoById($id_catalogo);
 
-        $ignorados = 0;
+        $enviados   = 0;
+        $ignorados  = 0;
+        $semImagens = 0;
         foreach ($aProdutos as $produto){
 
             $record = new StdClass();
@@ -113,14 +116,28 @@ class ClientAndroid {
 
             // TODO: Verificar se o produto tem imagem
             if ($produto->url_image != 'Main/Data/Imagens_Produtos/000000.jpg') {
-                $aRecords[] = $record;
+                // Verificar se o arquivo de imagem existe
+                $path = getcwd();
+                $img_path = "{$path}/{$produto->url_image}";
+                if (file_exists($img_path)){
+
+                    $record->image_size = filesize($img_path);
+                    $enviados++;
+                    $aRecords[] = $record;                
+                }
+                else {
+                    Log::Msg(3, "PRODUTO SEM IMAGEM [{$produto->pk_id_produto}] PATH [{$img_path}]");
+                    $semImagens++;
+                }
             }
             else {
                 Log::Msg(3, "PRODUTO IGNORADO [{$produto->pk_id_produto}]");
                 $ignorados++;
             }
         }
-        Log::Msg(3, "PRODUTOS IGNORADOS [{ignorados}]");
+        Log::Msg(3, "PRODUTOS IGNORADOS [{$ignorados}]");
+        Log::Msg(3, "PRODUTOS SEM IMAGEM[{$semImagens}]");
+        Log::Msg(3, "PRODUTOS ENVIADOS  [{$enviados}]");
 //          $record = new StdClass();
 //          $record->_id = 291;
 //          $record->codigo = 291;
@@ -263,7 +280,17 @@ class ClientAndroid {
         $record = new Repository();
         $record->setCommit(0);
 
-        $sql_insert = "INSERT INTO tb_orcamentos (`fk_id_cliente`, `fk_id_usuario`, `status`, `qtd_itens`,`valor_total`,`finalizadora`,`parcelamento`,`nfe`,`dt_inclusao`,`dt_envio`, `observacao`) VALUES ('{$pedido->fk_id_cliente}', '{$pedido->fk_id_usuario}', {$pedido->status}, '{$pedido->qtd_itens}', {$pedido->valor_total},'{$pedido->finalizadora}','{$pedido->parcelamento}','{$pedido->nfe}','{$pedido->dt_inclusao}','{$pedido->dt_envio}','{$pedido->observacao}')";
+        $sql_insert =  "INSERT INTO tb_orcamentos (
+                            `fk_id_cliente`, `fk_id_usuario`, `status`,
+                            `qtd_itens`, `valor_total`,`finalizadora`,
+                            `parcelamento`,`nfe`,`dt_inclusao`,`dt_envio`,
+                            `observacao`, `valor_total_entrega`, `qtd_itens_entregue`) 
+                        VALUES (
+                            '{$pedido->fk_id_cliente}', '{$pedido->fk_id_usuario}',
+                            {$pedido->status}, '{$pedido->qtd_itens}',
+                            {$pedido->valor_total}, '{$pedido->finalizadora}',
+                            '{$pedido->parcelamento}','{$pedido->nfe}',
+                            '{$pedido->dt_inclusao}','{$pedido->dt_envio}','{$pedido->observacao}', {$pedido->valor_total}, '{$pedido->qtd_itens}')";
 
         $pedido_id = $record->store($sql_insert);
 
