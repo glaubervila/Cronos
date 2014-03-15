@@ -99,6 +99,7 @@ class ClientAndroid {
         $enviados   = 0;
         $ignorados  = 0;
         $semImagens = 0;
+        
         foreach ($aProdutos as $produto){
 
             $record = new StdClass();
@@ -122,22 +123,41 @@ class ClientAndroid {
                 if (file_exists($img_path)){
 
                     $record->image_size = filesize($img_path);
-                    $enviados++;
-                    $aRecords[] = $record;                
+                    
+                    // Maior que 1Mb
+                    //if ($record->image_size > 1048576) {
+                    //if ($record->image_size < 1048576) { // TESTE SO ENTRA AS GRANDES
+                    // Maior que 100Kb
+                    if ($record->image_size > 102400) {
+                        $aImagensGrandes[] = $record;
+                        // Log::Msg(3, "PRODUTO IGNORADO IMAGEM GRANDE [{$record->codigo}]");
+                        $ignorados++;
+                    }
+                    else {
+                        $enviados++;
+                        $aRecords[] = $record;                                        
+                    }
                 }
                 else {
-                    Log::Msg(3, "PRODUTO SEM IMAGEM [{$produto->pk_id_produto}] PATH [{$img_path}]");
+                    //Log::Msg(3, "PRODUTO SEM IMAGEM [{$produto->pk_id_produto}] PATH [{$img_path}]");
+                    Log::Msg(3, "PRODUTO SEM IMAGEM [{$produto->pk_id_produto}] {$record->descricao}");
                     $semImagens++;
                 }
             }
             else {
-                Log::Msg(3, "PRODUTO IGNORADO [{$produto->pk_id_produto}]");
-                $ignorados++;
+                //Log::Msg(3, "PRODUTO SEM IMAGEM [{$produto->pk_id_produto}] PATH [{$img_path}]");
+                Log::Msg(3, "PRODUTO SEM IMAGEM [{$produto->pk_id_produto}] {$record->descricao}");
+                $semImagens++;
             }
         }
         Log::Msg(3, "PRODUTOS IGNORADOS [{$ignorados}]");
         Log::Msg(3, "PRODUTOS SEM IMAGEM[{$semImagens}]");
         Log::Msg(3, "PRODUTOS ENVIADOS  [{$enviados}]");
+
+        Log::Msg(3, "============= < Imagens Grandes > =============");        
+        foreach ($aImagensGrandes as $produto){
+            Log::Msg(3, "PRODUTO IMAGEM GRANDE [{$produto->codigo}] {$produto->descricao_curta}");
+        }
 //          $record = new StdClass();
 //          $record->_id = 291;
 //          $record->codigo = 291;
