@@ -34,6 +34,7 @@ session_start();
     1 - Dinheiro A Vista
     2 - Cartao de Credito
     3 - Cheque
+    4 - Boleto
 
  * NFE - Deseja Nota Fiscal Eletronica
     0 - Nao
@@ -964,6 +965,7 @@ class Orcamentos_Servidor {
         $finalizadora[1] = "Dinheiro";
         $finalizadora[2] = "Cartão de Credito";
         $finalizadora[3] = "Cheque";
+        $finalizadora[4] = "Boleto";
 
         return $finalizadora[$id];
     }

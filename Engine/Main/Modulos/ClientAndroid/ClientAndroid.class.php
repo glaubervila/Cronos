@@ -284,6 +284,8 @@ class ClientAndroid {
         $pedido->status        = 3; //À Separar
         $pedido->qtd_itens     = $data->qtd_itens;
         $pedido->valor_total   = $data->valor_total;
+        $pedido->valor_pagar   = $data->valor_pago;
+        $pedido->desconto      = $data->desconto;
         $pedido->finalizadora  = $data->finalizadora;
         $pedido->parcelamento  = $data->parcelamento;
         $pedido->nfe           = $data->nfe;
@@ -302,15 +304,16 @@ class ClientAndroid {
 
         $sql_insert =  "INSERT INTO tb_orcamentos (
                             `fk_id_cliente`, `fk_id_usuario`, `status`,
-                            `qtd_itens`, `valor_total`,`finalizadora`,
-                            `parcelamento`,`nfe`,`dt_inclusao`,`dt_envio`,
-                            `observacao`, `valor_total_entrega`, `qtd_itens_entregue`) 
+                            `qtd_itens`, `valor_total`, `valor_pagar`, `desconto`,
+                            `finalizadora`, `parcelamento`,`nfe`,`dt_inclusao`,`dt_envio`,
+                            `observacao`, `valor_total_entrega`,`valor_pago`, `desconto_final`, `qtd_itens_entregue`) 
                         VALUES (
                             '{$pedido->fk_id_cliente}', '{$pedido->fk_id_usuario}',
                             {$pedido->status}, '{$pedido->qtd_itens}',
-                            {$pedido->valor_total}, '{$pedido->finalizadora}',
-                            '{$pedido->parcelamento}','{$pedido->nfe}',
-                            '{$pedido->dt_inclusao}','{$pedido->dt_envio}','{$pedido->observacao}', {$pedido->valor_total}, '{$pedido->qtd_itens}')";
+                            {$pedido->valor_total}, {$pedido->valor_pagar}, {$pedido->desconto},
+                            '{$pedido->finalizadora}','{$pedido->parcelamento}','{$pedido->nfe}',
+                            '{$pedido->dt_inclusao}','{$pedido->dt_envio}','{$pedido->observacao}',
+                            {$pedido->valor_total}, {$pedido->valor_pagar}, {$pedido->desconto}, '{$pedido->qtd_itens}')";
 
         $pedido_id = $record->store($sql_insert);
 
@@ -343,6 +346,7 @@ class ClientAndroid {
             $result->msg  = "Desculpe mas houve uma Falha, não foi possivel gravar o registro...";
             $result->descricao = $erro;
             $result->status = 9; // Enviado Com Erro
+            echo json_encode($result);
             die(json_encode($result));
         }
         else {
