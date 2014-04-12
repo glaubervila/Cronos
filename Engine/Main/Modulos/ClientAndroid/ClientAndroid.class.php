@@ -294,6 +294,20 @@ class ClientAndroid {
         $pedido->observacao    = $data->observacao;
 
 
+        // Desfazer desconto se nao for em dinheiro
+        // TODO deveria ser feito no android
+        /*if ($pedido->finalizadora != 0) {
+            $pedido->valor_pagar = $pedido->valor_total;
+            $pedido->desconto = 0;
+        }*/
+        
+        if(!$pedido->valor_pagar > 0) {
+            $pedido->valor_pagar = 0;
+        }
+        if(!$pedido->desconto > 0) {
+            $pedido->desconto = 0;
+        }
+
         $strProdutos = str_replace('\\','',$data->produtos);
         $str = "[$strProdutos]";
         $aProdutos = json_decode($str);
