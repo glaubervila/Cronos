@@ -399,21 +399,20 @@ class Clientes {
     public function getCliente($pkey){
         Log::Msg(2,"Class[ Clientes ] Method[ getCliente ]");
 
-
         if ($pkey){
             $this->_pk_id_cliente = $pkey;
         }
-        $sql = "SELECT " . $this->_pkey . ',' . implode(', ', $this->_fields)." FROM {$this->_entidade} WHERE {$this->_pkey} = '{$this->_pk_id_cliente}'";
 
+        $sql = "SELECT " . $this->_pkey . ',' . implode(', ', $this->_fields)." FROM {$this->_entidade} WHERE {$this->_pkey} = '{$this->_pk_id_cliente}'";
         $results = $this->_record->load($sql);
         Log::Msg(5,$results);
-
+        
         //Recuperando endereco
         //$this->_objEndereco->_id = $results->rows[0]->fk_id_endereco;
         //$endereco = $this->_objEndereco->getEndereco();
-
         $this->_objEndereco->set_referencia('tb_clientes', "{$this->_pk_id_cliente}");
         $endereco = $this->_objEndereco->getEnderecoByReferencia();
+
         // Juntando os 2 Objetos (Loja,Endereco)
         $results = Common::mergeObject(array($results->rows[0],$endereco));
 
@@ -584,23 +583,27 @@ class Clientes {
         Log::Msg(2,"Class[ Clientes ] Method[ RelatorioClientes ]");
 
         // Recuperar os Clientes
-        $sql = "SELECT pk_id_cliente FROM `tb_clientes` WHERE status_servidor = 0";
+        $sql = "SELECT pk_id_cliente FROM `tb_clientes` WHERE status_servidor = 1";
         $results = $this->_record->load($sql);
 
 
         if ($results->count != 0) {
             $this->return_json = false;
+            $i = 0;
             foreach ($results->rows as $cliente){
-
+                Log::Msg(3,"[$i] Cliente [ {$cliente->pk_id_cliente} ]");
                 $aClientes[] = $this->getCliente($cliente->pk_id_cliente);
-
+                $i++;
             }
+            Log::Msg(3,"SAIU DO FOR");
+            
         }
         else {
             $aResult['failure'] = "true";
             $aResult['msg']  = "Nenhum Registro Encontrado!";
             die(json_encode($aResult));
         }
+        Log::Msg(3,"Return");
 
         return $aClientes;
     }
@@ -609,7 +612,7 @@ class Clientes {
         Log::Msg(2,"Class[ Clientes ] Method[ RelatorioClientesVendedor ]");
 
         // Recuperar os Clientes
-        $sql = "SELECT pk_id_cliente FROM `tb_clientes` WHERE status_servidor = 0";
+        $sql = "SELECT pk_id_cliente FROM `tb_clientes` WHERE status_servidor = 1";
         $results = $this->_record->load($sql);
 
 
@@ -642,8 +645,6 @@ class Clientes {
             $aResult['msg']  = "Nenhum Registro Encontrado!";
             die(json_encode($aResult));
         }
-
-        //var_dump($aClientes[0]);
 
         return $aClientes;
     }

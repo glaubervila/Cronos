@@ -1,43 +1,15 @@
 10
 
 dir
-35
-file:///home/gverde/Repositorio/cronos/trunk/Engine/Main/Bin
-file:///home/gverde/Repositorio/cronos
+1
+file:///svn/cronos/Engine/Main/Bin
+file:///svn
 
 
 
-2011-10-26T17:41:57.080231Z
-2
-glauber
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-2ca7a77f-6120-454f-b6a0-74e346e7a1a8
-
-CheckSMB
-file
-
-
-
-
-2012-02-27T22:06:47.663943Z
-2336d2c3ed5fe1614f4a83f8b1f42b22
-2011-10-26T17:41:57.080231Z
-2
-glauber
-has-props
+2011-03-18T18:48:06.929899Z
+1
+root
 
 
 
@@ -52,13 +24,7 @@ has-props
 
 
 
-
-
-
-
-
-
-1253
+39f98809-3c2c-4311-bee9-4e24f4fcecd7
 
 verifica_rede.sh
 file
@@ -66,11 +32,11 @@ file
 
 
 
-2012-02-27T22:06:47.663943Z
+2011-03-18T20:35:50.000000Z
 73c89e8d5621fd1fbb1ecc1594e14cc1
-2011-10-26T17:41:57.080231Z
-2
-glauber
+2011-03-18T18:48:06.929899Z
+1
+root
 has-props
 
 
@@ -100,11 +66,11 @@ file
 
 
 
-2012-02-27T22:06:47.663943Z
+2011-03-18T20:35:50.000000Z
 85b47ef6b8fb25d168b8b525897a9efb
-2011-10-26T17:41:57.080231Z
-2
-glauber
+2011-03-18T18:48:06.929899Z
+1
+root
 has-props
 
 
@@ -130,15 +96,15 @@ has-props
 
 cronos
 file
+4
 
 
 
-
-2012-02-27T22:06:47.663943Z
-081b0db18b1a395a7ac272d65758a9b9
-2011-10-26T17:41:57.080231Z
-2
-glauber
+2011-04-18T16:19:47.955854Z
+249a418bb5ef3f64042385f485de5f46
+2011-04-19T13:43:09.922219Z
+4
+root
 has-props
 
 
@@ -160,7 +126,7 @@ has-props
 
 
 
-6497
+6520
 
 CheckNetwork
 file
@@ -168,11 +134,11 @@ file
 
 
 
-2012-02-27T22:06:47.663943Z
+2011-03-18T20:35:50.000000Z
 655a67589c49baca6f5dfe8caba096db
-2011-10-26T17:41:57.080231Z
-2
-glauber
+2011-03-18T18:48:06.929899Z
+1
+root
 has-props
 
 
@@ -198,15 +164,15 @@ has-props
 
 CheckRCV
 file
+4
 
 
 
-
-2012-02-27T22:06:47.663943Z
-c86c6db49bdf8a6f9a48107e25d12bf3
-2011-10-26T17:41:57.080231Z
-2
-glauber
+2011-03-21T20:05:14.000000Z
+d11d3350f1b23c58e22f6d1d22bc6387
+2011-04-19T13:43:09.922219Z
+4
+root
 has-props
 
 
@@ -228,7 +194,7 @@ has-props
 
 
 
-1070
+989
 
 common
 file
@@ -236,11 +202,11 @@ file
 
 
 
-2012-02-27T22:06:47.663943Z
+2011-03-18T20:35:50.000000Z
 85b47ef6b8fb25d168b8b525897a9efb
-2011-10-26T17:41:57.080231Z
-2
-glauber
+2011-03-18T18:48:06.929899Z
+1
+root
 has-props
 
 
@@ -270,11 +236,11 @@ file
 
 
 
-2012-02-27T22:06:47.663943Z
+2011-03-18T20:35:50.000000Z
 a7bf4471634a345c1dc6781c92910378
-2011-10-26T17:41:57.080231Z
-2
-glauber
+2011-03-18T18:48:06.929899Z
+1
+root
 has-props
 
 
@@ -298,51 +264,17 @@ has-props
 
 466
 
-Cronos.pid
-file
-
-
-
-
-2012-02-27T22:06:47.663943Z
-8abefa491d6bc8a2877eaebcb34dfb52
-2011-10-26T17:41:57.080231Z
-2
-glauber
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-5
-
 cronos_usr_local_bin
 file
 
 
 
 
-2012-02-27T22:06:47.673943Z
-a21894c04a3fee7200756dfa5d9fdf6d
-2011-10-26T17:41:57.080231Z
-2
-glauber
+2011-03-18T20:35:50.000000Z
+17bf8a15515186f321cdc56e95d4009e
+2011-03-18T18:48:06.929899Z
+1
+root
 has-props
 
 
@@ -364,39 +296,5 @@ has-props
 
 
 
-141
-
-move_file.sh
-file
-40
-
-
-
-2012-08-29T19:23:20.718207Z
-54c32403bde19a881001aa57c3c56c74
-2013-01-14T16:32:55.257669Z
-40
-gverde
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-256
+163
 

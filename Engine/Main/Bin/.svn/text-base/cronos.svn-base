@@ -2,9 +2,11 @@
 
 
 
+
+
 # ----------- Variaveis e arquivo de configuracao -----------
 programa="Cronos"
-conf_file="/var/www/cronos/Engine/Conf/cronos.conf"
+conf_file="/var/www/html/cronos/Engine/Conf/cronos.conf"
 
 # conf_parser()
 #    usage: conf_parser <file>
@@ -31,7 +33,7 @@ logfile="${main_dir}${log_file_dir}${programa}.log"
 date=$(date +"%Y-%m-%d")
 
 
-trap 'rm -f ${lockfile} ; exit' 0 1 2 3 15
+#trap 'rm -f ${lockfile} ; exit' 0 1 2 3 15
 
 #echo "Engine Pid[$$]";
 
@@ -79,7 +81,7 @@ function start() {
 
         # executar os scripts em loop
         process_start CheckRCV
-        process_start CheckSMB
+        #process_start CheckNetwork
     fi
 }
 
@@ -119,7 +121,7 @@ function stop() {
     echo "Finalizando ${programa}"
 
     process_stop CheckRCV
-    process_stop CheckSMB
+    #process_stop CheckNetwork
 
     rm -f $lockfile
     rm -f $pidfile
@@ -169,7 +171,7 @@ function status(){
     echo -e "${programa} Status"
 
     Process_Status CheckRCV
-    Process_Status CheckSMB
+    #Process_Status CheckNetwork
 }
 
 # Process_Status()

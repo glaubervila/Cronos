@@ -4,7 +4,7 @@
 
 # ----------- Variaveis e arquivo de configuracao -----------
 programa="Cronos"
-conf_file="/var/www/cronos/Engine/Conf/cronos.conf"
+conf_file="/var/cronos/Engine/Conf/cronos.conf"
 
 # conf_parser()
 #    usage: conf_parser <file>

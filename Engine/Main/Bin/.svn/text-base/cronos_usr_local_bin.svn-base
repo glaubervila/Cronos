@@ -1,4 +1,4 @@
 #!/bin/bash
 #Colocar este script na /usr/local/bin
 #Apontando para o Caminho onde estao os scripts
-/var/www/cronos/Engine/Main/Bin/cronos $*
+/opt/lampp/htdocs/xampp/crm_portofino/Engine/Main/Bin/cronos $*

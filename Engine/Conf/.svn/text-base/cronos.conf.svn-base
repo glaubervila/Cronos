@@ -39,7 +39,8 @@ log_file_dir=Log/
 log_enable=1
 
 # Tempo de Espera no Loop do RCV
-rcv_sleep=1
+rcv_sleep=5
+
 # Tempo de Espera no Loop do SMB
 smb_sleep=350
 

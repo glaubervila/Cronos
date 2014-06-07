@@ -17,8 +17,6 @@ rcv=${main_dir}${rcv_dir}
 echo $$ > $pidfile
 touch $lockfile
 
-trap 'rm -f ${lockfile} ; exit' 0 1 2 3 15
-
 # ----------- Funcoes -----------
 
 function LogMsg(){
@@ -37,20 +35,18 @@ while [ -r $lockfile ]; do
     cd ${rcv}
     qtd_arquivos=$(ls | wc -l) 2>&1 >/dev/null
 
-    LogMsg "Lendo Diretorio... QTD[ ${qtd_arquivos} ]  Sleep [ ${rcv_sleep} ]"
+    LogMsg "Lendo Diretorio... QTD[ ${qtd_arquivos} ]"
 
     if [ ${qtd_arquivos} -gt 0 ]; then
 
         LogMsg "O diretorio nao esta vazio"
-
-
         cd ${main_dir}
         php -q Main/PHP/Processa_RCV.class.php --rcv_dir=${rcv} --log_file=${logfile}
 
     fi
 
     ((i++))
-    sleep ${rcv_sleep}
+    sleep 5
 done
 
 

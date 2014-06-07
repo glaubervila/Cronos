@@ -254,7 +254,6 @@ class AppReports extends FPDF{
                         $extensao = "{$content->extensao}";
                         $this->Image($image, $x, $y, null , $heigh, $extensao);
                     }
-
                 break;
             }
         }
@@ -267,7 +266,6 @@ class AppReports extends FPDF{
             if (($str_width > $width) && ($scale)){
                 // Escala a Fonte para Caber no campo.
                 $this->CellFit($width, $heigh, $content, $border, 0, $alignH, false,false,true);
-
             }
             else {
                 // String Normal
@@ -294,7 +292,6 @@ class AppReports extends FPDF{
 
     public function simpleGrid()
     {
-
         // verifica se foram definidas as colunas do relatório
         if (count($this->columns) == 0){
             throw new Exception('Colunas do relatório não definidas');
@@ -308,15 +305,12 @@ class AppReports extends FPDF{
             $rows = $this->data_report;
         }
 
-
-
         //var_dump($rows);
-
         $colore = FALSE;
         // percorre os resultados
         $ln = 1;
         foreach ($rows as $row){
-
+            Log::Msg(3,"ROW $ln");
             // define o estilo a ser utilizado
             $style = $colore ? 'rowI' : 'rowP';
 
@@ -342,9 +336,11 @@ class AppReports extends FPDF{
                 else {
                     $content = $row->$alias;
                 }
+                Log::Msg(3,"    $content");
                 $scale   = $column['scale'];
                 $ralign  = strtoupper(substr($column['ralign'],0,1));
 
+                
                 $this->gridAddCell($content, $ralign, $style, 1, $border, $scale);
 
                 $content = null;
